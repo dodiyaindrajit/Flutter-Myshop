@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:myshop/constants/colors.dart';
+import 'package:myshop/screens/home/home.dart';
+import 'package:myshop/screens/splash.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: ColorConstants.kPrimaryColor,
+        fontFamily: 'Philosopher',
       ),
-    );
-  }
+      // home: const Text("Run APP"),
+      title: "Amit Prajapati",
+      routes: {
+        "/": (context) => const SplashScreen(),
+        "/home": (context) => const HomeScreen(),
+      },
+    ),
+  );
 }

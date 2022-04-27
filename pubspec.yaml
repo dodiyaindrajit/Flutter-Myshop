@@ -14,6 +14,11 @@ dependencies:
 
   cupertino_icons: ^1.0.4
 
+  responsive_sizer: ^3.0.5+1 #Responsive Layout Helper
+  font_awesome_flutter: ^10.1.0  #Get Font Awesome Icons
+  persistent_bottom_nav_bar_v2: ^4.1.10 #Animated Bottom NavBar
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
