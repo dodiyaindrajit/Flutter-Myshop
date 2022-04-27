@@ -18,6 +18,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0  #Get Font Awesome Icons
   persistent_bottom_nav_bar_v2: ^4.1.10 #Animated Bottom NavBar
 
+  lottie: ^1.3.0 #Animation Provider (json)
+
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +30,11 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/animation/
+
 
   
   

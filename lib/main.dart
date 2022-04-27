@@ -11,8 +11,7 @@ void main() {
         primaryColor: ColorConstants.kPrimaryColor,
         fontFamily: 'Philosopher',
       ),
-      // home: const Text("Run APP"),
-      title: "Amit Prajapati",
+      color: ColorConstants.kPrimaryColor,
       routes: {
         "/": (context) => const SplashScreen(),
         "/home": (context) => const HomeScreen(),
