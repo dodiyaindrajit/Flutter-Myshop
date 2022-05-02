@@ -1,5 +1,3 @@
-
-
 class ImageConstants {
-  // static const Image icon1 = " ";
+  static const String comingSoon = "assets/images/comming_soon.jpg";
 }

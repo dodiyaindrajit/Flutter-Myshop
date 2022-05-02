@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
-import 'package:myshop/screens/home/widgets/app_Bar.dart';
 import 'package:myshop/screens/home/widgets/tab_view.dart';
 
 class CartScreen extends StatefulWidget {
@@ -28,30 +27,25 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    print(_tabController.index.toString());
-
-    return Scaffold(
-      appBar: const PreferredSize(preferredSize: Size(0, 40), child: CustomeAppBar()),
-      body: Container(
-        color: ColorConstants.kGray,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          children: [
-            //TabBar - 2 Options
-            tabBar(),
-            const SizedBox(height: 10),
-            //Main Contain
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  CustomeTabView(),
-                  CustomeTabView(),
-                ],
-              ),
+    return Container(
+      color: ColorConstants.kGray,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Column(
+        children: [
+          //TabBar - 2 Options
+          tabBar(),
+          const SizedBox(height: 10),
+          //Main Contain
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: const [
+                CustomeTabView(),
+                CustomeTabView(),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -76,7 +70,7 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
         ),
         labelColor: ColorConstants.kDarkGreen,
         unselectedLabelColor: ColorConstants.kBlack,
-        labelStyle: StyleConstants.textStyle20,
+        labelStyle: StyleConstants.textStyle18,
         tabs: const [
           Tab(
             text: 'WOMAN',

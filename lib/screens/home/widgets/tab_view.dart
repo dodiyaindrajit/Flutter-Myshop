@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:myshop/Widgets/categories_title.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -24,24 +23,11 @@ class _CustomeTabViewState extends State<CustomeTabView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //ACTIVEWEAR
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("ACTIVEWEAR", style: TextStyle(fontWeight: FontWeight.bold)),
-              MaterialButton(
-                onPressed: () {},
-                padding: EdgeInsets.zero,
-                child: Row(
-                  children: const [
-                    Text(
-                      "SHOP NOW",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                    Icon(Icons.chevron_right_rounded),
-                  ],
-                ),
-              )
-            ],
+          CategoriesTitle(
+            title: 'ACTIVEWEAR',
+            subTitle: 'SHOP NOW',
+            onPressed: () {},
+            isSubtitle: true,
           ),
           //CARD TYPE-1
           SingleChildScrollView(

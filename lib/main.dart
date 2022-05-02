@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myshop/constants/colors.dart';
+import 'package:myshop/screens/animated_bottom_bar.dart';
 import 'package:myshop/screens/home/home.dart';
 import 'package:myshop/screens/splash.dart';
 
@@ -21,6 +22,7 @@ void main() {
       color: ColorConstants.kPrimaryColor,
       routes: {
         "/": (context) => const SplashScreen(),
+        "/animatedBar": (context) => AnimatedBottomBar(),
         "/home": (context) => const HomeScreen(),
       },
     ),
