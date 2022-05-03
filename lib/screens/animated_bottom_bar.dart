@@ -37,7 +37,7 @@ class AnimatedBottomBar extends StatelessWidget {
         const CartScreen(),
         const SearchScreen(),
         const FavoriteScreen(),
-        SettingScreen(),
+        const SettingScreen(),
       ];
     }
 
@@ -55,23 +55,15 @@ class AnimatedBottomBar extends StatelessWidget {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return AdvancedDrawer(
         backdropColor: ColorConstants.kDarkGreen,
+        openRatio: 0.5,
         controller: advancedDrawerController,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         animateChildDecoration: true,
         rtlOpening: false,
-        // openScale: 1.0,
         disabledGestures: false,
-        childDecoration: const BoxDecoration(
-          // NOTICE: Uncomment if you want to add shadow behind the page.
-          // Keep in mind that it may cause animation jerks.
-          // boxShadow: <BoxShadow>[
-          //   BoxShadow(
-          //     color: Colors.black12,
-          //     blurRadius: 0.0,
-          //   ),
-          // ],
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+        childDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Scaffold(
           backgroundColor: ColorConstants.kGray,
@@ -86,11 +78,7 @@ class AnimatedBottomBar extends StatelessWidget {
                 screens: _buildScreens(),
                 items: _navBarsItems(),
                 confineInSafeArea: true,
-                // bottomScreenMargin: 10,
                 navBarHeight: 40,
-                // decoration: NavBarDecoration(
-                //   borderRadius: BorderRadius.circular(15.0),
-                // ),
                 popAllScreensOnTapOfSelectedTab: true,
                 popActionScreens: PopActionScreensType.all,
                 itemAnimationProperties: const ItemAnimationProperties(
@@ -105,7 +93,7 @@ class AnimatedBottomBar extends StatelessWidget {
                 navBarStyle: NavBarStyle.style6,
                 onItemSelected: (index) {},
                 backgroundColor: ColorConstants.kGray,
-                // padding: NavBarPadding.only(top:10),
+                padding: const NavBarPadding.only(top:10),
                 bottomScreenMargin: 40,
               ),
             ),
@@ -119,13 +107,13 @@ class AnimatedBottomBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  padding: EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1.5,
                       color: ColorConstants.kPrimaryColor,
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(80)),
+                    borderRadius: const BorderRadius.all(Radius.circular(80)),
                   ),
                   child: ClipOval(
                     child: SizedBox.fromSize(
@@ -141,27 +129,27 @@ class AnimatedBottomBar extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.home),
-                  title: Text('Home'),
+                  leading: const Icon(Icons.home),
+                  title: const Text('Home'),
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.account_circle_rounded),
-                  title: Text('Profile'),
+                  leading: const Icon(Icons.account_circle_rounded),
+                  title: const Text('Profile'),
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.favorite),
-                  title: Text('Favourites'),
+                  leading: const Icon(Icons.favorite),
+                  title: const Text('Favourites'),
                 ),
                 ListTile(
                   onTap: () {},
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
+                  leading: const Icon(Icons.settings),
+                  title: const Text('Settings'),
                 ),
-                Spacer(),
+                const Spacer(),
                 DefaultTextStyle(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white54,
                   ),
@@ -169,7 +157,7 @@ class AnimatedBottomBar extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(
                       vertical: 16.0,
                     ),
-                    child: Text('Terms of Service | Privacy Policy'),
+                    child: const Text('Terms of Service | Privacy Policy'),
                   ),
                 ),
               ],
@@ -180,17 +168,3 @@ class AnimatedBottomBar extends StatelessWidget {
     });
   }
 }
-
-// ListView.builder(
-// itemCount: _tabItemsCount,
-// scrollDirection: Axis.horizontal,
-// itemBuilder: (BuildContext context, int index) {
-// return CustomeTabView();
-// }),
-
-// ListView.builder(
-// itemCount: 15,
-// scrollDirection: Axis.horizontal,
-// itemBuilder: (BuildContext context, int index) {
-// return tabItem("title", "");
-// }),

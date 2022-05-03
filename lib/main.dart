@@ -12,9 +12,8 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Previously it was implemented like this
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: ColorConstants.kPrimaryColor, // but now it should be declared like this
+          accentColor: ColorConstants.kPrimaryColor,
         ),
         primaryColor: ColorConstants.kPrimaryColor,
         fontFamily: 'Gabriel',

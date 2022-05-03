@@ -247,10 +247,10 @@ class ProductImage extends StatelessWidget {
           Expanded(
             child: CachedNetworkImage(imageUrl: imageUrl),
           ),
-          if (title != "")
+          if (title != " ")
             Text("Homeasd asd as asd asd asd asdas dasd asdas dasd asd a",
                 maxLines: oldPrice != " " ? 2 : 3),
-          if (title != "")
+          if (title != " ")
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
