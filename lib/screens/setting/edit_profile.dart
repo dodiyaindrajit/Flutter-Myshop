@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
@@ -17,8 +16,12 @@ class _EditProfileState extends State<EditProfile> {
   bool _isEditProfile = false;
   bool _isEditFieldVisible = false;
 
-  final _formKey = GlobalKey<FormState>();
+  final PageController _editProfilePageViewController = PageController();
 
+  int upperBound = 6;
+  int activeStep = 5;
+
+  final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
 
   void _submit() {
@@ -43,11 +46,11 @@ class _EditProfileState extends State<EditProfile> {
         width: 100.w,
         // padding: const EdgeInsets.only(bottom: 10),
         clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: ColorConstants.kDarkGreen,
           borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(40.0),
-            bottomLeft: Radius.circular(40.0),
+            bottomRight: Radius.circular(_isEditProfile ? 20 : 40.0),
+            bottomLeft: Radius.circular(_isEditProfile ? 20 : 40.0),
           ),
         ),
         onEnd: () {
@@ -93,7 +96,7 @@ class _EditProfileState extends State<EditProfile> {
                     label: Text(
                       "KarmaLn Technology",
                       style:
-                          StyleConstants.textStyle18.copyWith(color: ColorConstants.kPrimaryColor),
+                          StyleConstants.textStyle17.copyWith(color: ColorConstants.kPrimaryColor),
                     ),
                     onPressed: () {
                       setState(() {
@@ -109,57 +112,104 @@ class _EditProfileState extends State<EditProfile> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Row(
-                              children: [
-                                textFiled("Enter First Name", "First Name", TextInputType.text,
-                                    emailController),
-                                const SizedBox(width: 10),
-                                textFiled("Enter Last Name", "Last Name", TextInputType.text,
-                                    emailController),
-                              ],
-                            ),
-                            WidgetConst.spacer(2.h),
-                            Row(
-                              children: [
-                                textFiled("Enter Your Email", "Email", TextInputType.emailAddress,
-                                    emailController),
-                                const SizedBox(width: 10),
-                                textFiled("Enter Your Mobile", "Mobile", TextInputType.phone,
-                                    emailController),
-                              ],
-                            ),
-                            WidgetConst.spacer(2.h),
-                            Row(
-                              children: [
-                                textFiled("Choose Date of Birth", "DOB", TextInputType.datetime,
-                                    emailController),
-                                const SizedBox(width: 10),
-                                textFiled("Gender", "Last Name", TextInputType.emailAddress,
-                                    emailController),
-                              ],
-                            ),
-                            WidgetConst.spacer(2.h),
-                            Row(
-                              children: [
-                                textFiled("Enter First Name", "First Name",
-                                    TextInputType.emailAddress, emailController),
-                                const SizedBox(width: 10),
-                                textFiled("Enter Last Name", "Last Name",
-                                    TextInputType.emailAddress, emailController),
-                              ],
-                            ),
-                            WidgetConst.spacer(2.h),
-                            MaterialButton(
-                              color: ColorConstants.kPrimaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                            SizedBox(
+                              height: 20.h,
+                              child: PageView(
+                                controller: _editProfilePageViewController,
+                                children: <Widget>[
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          textFiled("Enter First Name", "First Name",
+                                              TextInputType.text, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Last Name", "Last Name",
+                                              TextInputType.text, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                      Row(
+                                        children: [
+                                          textFiled("Enter Your Email", "Email",
+                                              TextInputType.emailAddress, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Your Mobile", "Mobile",
+                                              TextInputType.phone, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          textFiled("Enter First Name", "First Name",
+                                              TextInputType.text, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Last Name", "Last Name",
+                                              TextInputType.text, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                      Row(
+                                        children: [
+                                          textFiled("Enter Your Email", "Email",
+                                              TextInputType.emailAddress, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Your Mobile", "Mobile",
+                                              TextInputType.phone, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          textFiled("Enter First Name", "First Name",
+                                              TextInputType.text, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Last Name", "Last Name",
+                                              TextInputType.text, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                      Row(
+                                        children: [
+                                          textFiled("Enter Your Email", "Email",
+                                              TextInputType.emailAddress, emailController),
+                                          const SizedBox(width: 10),
+                                          textFiled("Enter Your Mobile", "Mobile",
+                                              TextInputType.phone, emailController),
+                                        ],
+                                      ),
+                                      WidgetConst.spacer(2.h),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              textColor: ColorConstants.kDarkGreen,
-                              child: Text("save",
-                                  style:
-                                      TextStyle(color: ColorConstants.kDarkGreen, fontSize: 20.sp)),
-                              onPressed: () => _submit(),
-                            )
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                previousButton(),
+                                MaterialButton(
+                                  color: ColorConstants.kPrimaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  textColor: ColorConstants.kDarkGreen,
+                                  child: Text("save",
+                                      style: TextStyle(
+                                          color: ColorConstants.kDarkGreen, fontSize: 20.sp)),
+                                  onPressed: () => _submit(),
+                                ),
+                                nextButton(),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -170,6 +220,46 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget previousButton() {
+    return MaterialButton(
+      color: ColorConstants.kPrimaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      textColor: ColorConstants.kDarkGreen,
+      child: Text("Prev", style: TextStyle(color: ColorConstants.kDarkGreen, fontSize: 17.sp)),
+      onPressed: () {
+        _editProfilePageViewController.previousPage(
+            duration: const Duration(seconds: 1), curve: Curves.ease);
+        if (activeStep > 0) {
+          setState(() {
+            activeStep--;
+          });
+        }
+      },
+    );
+  }
+
+  Widget nextButton() {
+    return MaterialButton(
+      color: ColorConstants.kPrimaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      textColor: ColorConstants.kDarkGreen,
+      child: Text("Next", style: TextStyle(color: ColorConstants.kDarkGreen, fontSize: 17.sp)),
+      onPressed: () {
+        // Increment activeStep, when the next button is tapped. However, check for upper bound.
+        _editProfilePageViewController.nextPage(duration: const Duration(seconds: 1), curve: Curves.ease);
+        if (activeStep < upperBound) {
+          setState(() {
+            activeStep++;
+          });
+        }
+      },
     );
   }
 
@@ -192,7 +282,7 @@ class _EditProfileState extends State<EditProfile> {
           labelText: labelText,
           fillColor: ColorConstants.kPrimaryColor,
           // isDense: true,
-          contentPadding: EdgeInsets.all(4),
+          contentPadding: const EdgeInsets.all(4),
           errorStyle:
               const TextStyle(color: ColorConstants.kPrimaryColor, fontWeight: FontWeight.bold),
         ),

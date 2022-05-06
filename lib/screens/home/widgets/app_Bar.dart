@@ -15,14 +15,6 @@ class CustomeAppBar extends StatefulWidget {
 }
 
 class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateMixin {
-  AnimationController? _menuIconController;
-
-  @override
-  void initState() {
-    _menuIconController =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

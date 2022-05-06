@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/Widgets/categories_title.dart';
+import 'package:myshop/Widgets/product_info.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/image.dart';
 import 'package:myshop/constants/style.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    // callApi();
     super.initState();
   }
 
@@ -29,6 +31,28 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     super.dispose();
   }
+
+  // void callApi() async {
+  //   // final response = await http.get(Uri.parse('http://127.0.0.1:8000/users/'));
+  //
+  //   final http.Response response = await http.get(
+  //     Uri.parse('http://127.0.0.1:8000/users/'),
+  //     headers: <String, String>{
+  //       'Accept': 'application/json',
+  //       'Authorization': 'Basic YW1pdDphbWl0QDEyMw==',
+  //     },
+  //   );
+  //
+  //   if (response.statusCode == 200) {
+  //     // If the server did return a 200 OK response,
+  //     // then parse the JSON.
+  //     print(jsonDecode(response.body));
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load album');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ["Fresh", "https://img.icons8.com/color/344/group-of-fruits.png"],
       ["Watch", "https://img.icons8.com/fluency/344/apple-watch.png"],
     ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -169,6 +194,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Container countDownDeals(BuildContext context) {
+    List _productInfo = [
+      ["Nike", "https://pngimg.com/uploads/running_shoes/running_shoes_PNG5816.png"],
+      [
+        "Mobile",
+        "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg"
+      ],
+      ["Clocks", "https://pngimg.com/uploads/clock/small/clock_PNG6655.png"],
+      ["TV", "https://pngimg.com/uploads/tv/small/tv_PNG39249.png"],
+    ];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(top: 20),
@@ -197,22 +231,24 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 ProductImage(
                     onTap: () => pushNewScreenWithRouteSettings(context,
-                        screen: const CartScreen(), settings: const RouteSettings()),
-                    imageUrl: "https://pngimg.com/uploads/running_shoes/running_shoes_PNG5816.png"),
+                        screen: ProductInfo(imageUrl: _productInfo[0][1]),
+                        settings: const RouteSettings()),
+                    imageUrl: _productInfo[0][1]),
                 ProductImage(
                     onTap: () => pushNewScreenWithRouteSettings(context,
-                        screen: const CartScreen(), settings: const RouteSettings()),
-                    imageUrl:
-                        "https://www.seekpng.com/png/full/973-9736259_latest-smartphones-android-mobile-phones-at-best-chico.png"),
+                        screen: ProductInfo(imageUrl: _productInfo[1][1]),
+                        settings: const RouteSettings()),
+                    imageUrl: _productInfo[1][1]),
                 ProductImage(
                     onTap: () => pushNewScreenWithRouteSettings(context,
-                        screen: const CartScreen(), settings: const RouteSettings()),
-                    imageUrl:
-                        "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/e5881832-36f8-4c1c-a767-10f2c2a55a02_600x.png?v=1625046573"),
+                        screen: ProductInfo(imageUrl: _productInfo[2][1]),
+                        settings: const RouteSettings()),
+                    imageUrl: _productInfo[2][1]),
                 ProductImage(
                     onTap: () => pushNewScreenWithRouteSettings(context,
-                        screen: const CartScreen(), settings: const RouteSettings()),
-                    imageUrl: "https://www.pngmart.com/files/13/Smartwatch-Gadget-PNG-Clipart.png"),
+                        screen: ProductInfo(imageUrl: _productInfo[3][1]),
+                        settings: const RouteSettings()),
+                    imageUrl: _productInfo[3][1]),
               ],
             ),
           ),
@@ -247,16 +283,14 @@ class ProductImage extends StatelessWidget {
           Expanded(
             child: CachedNetworkImage(imageUrl: imageUrl),
           ),
-          if (title != " ")
-            Text("Homeasd asd as asd asd asd asdas dasd asdas dasd asd a",
-                maxLines: oldPrice != " " ? 2 : 3),
+          if (title != " ") Text("ProductImg ", maxLines: oldPrice != "" ? 2 : 3),
           if (title != " ")
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   "₹2999",
-                  style: StyleConstants.textStyle18,
+                  style: StyleConstants.textStyle17,
                 ),
                 Text("₹3000", style: StyleConstants.textStyleStrike16)
               ],

@@ -70,7 +70,7 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
         ),
         labelColor: ColorConstants.kDarkGreen,
         unselectedLabelColor: ColorConstants.kBlack,
-        labelStyle: StyleConstants.textStyle18,
+        labelStyle: StyleConstants.textStyle17,
         tabs: const [
           Tab(
             text: 'WOMAN',

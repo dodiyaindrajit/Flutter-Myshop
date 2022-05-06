@@ -1,13 +1,7 @@
-import 'dart:ui';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
-import 'package:myshop/constants/style.dart';
 import 'package:myshop/screens/setting/edit_profile.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -56,7 +50,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     leading: listIcons[index],
                     trailing: const Icon(Icons.arrow_forward_ios_rounded),
                     onTap: () {
-                      print("Click");
                     },
                   ),
                 );

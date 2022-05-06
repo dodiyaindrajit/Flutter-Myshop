@@ -20,12 +20,18 @@ dependencies:
   persistent_bottom_nav_bar_v2: ^4.1.10 #Animated Bottom NavBar
   carousel_slider: ^4.1.1 #Image Slider
   cached_network_image: ^3.2.0 #Store Network Image In Cache
+  share_plus: ^4.0.4 #share button
+  awesome_select: ^5.2.0
 
   #Animation
   lottie: ^1.3.0 #Animation Provider (json)
   badges: ^2.0.2
-  slide_countdown: ^0.2.3
+  slide_countdown: ^0.2.4
   flutter_advanced_drawer: ^1.3.2
+  im_stepper: ^0.1.3
+
+  #
+  http: ^0.13.4
 
 
 dev_dependencies:
