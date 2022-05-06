@@ -3,19 +3,23 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
+import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
+import 'package:provider/provider.dart';
 
 class CustomeAppBar extends StatefulWidget {
   const CustomeAppBar({
     Key? key,
+    required this.callBackCartOpen,
   }) : super(key: key);
+
+  final Function callBackCartOpen;
 
   @override
   State<CustomeAppBar> createState() => _CustomeAppBarState();
 }
 
 class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,14 +40,19 @@ class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateM
         ),
         actions: [
           Badge(
-            badgeContent: const Text('3', style: TextStyle(color: ColorConstants.kPrimaryColor)),
+            badgeContent: Consumer<CartProvider>(
+              builder: (context, consumer, child) {
+                return Text("${consumer.getCartItems().length}",
+                    style: const TextStyle(color: ColorConstants.kPrimaryColor));
+              },
+            ),
             animationType: BadgeAnimationType.scale,
-            position: BadgePosition.topStart(top: -1, start: 25),
+            position: BadgePosition.topStart(top: -1, start: 20),
             padding: const EdgeInsets.all(1),
             badgeColor: ColorConstants.kDarkGreen,
             child: IconButton(
               icon: const FaIcon(FontAwesomeIcons.cartShopping, size: 20),
-              onPressed: () {},
+              onPressed: () => widget.callBackCartOpen(),
               color: ColorConstants.kPrimaryColor,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,

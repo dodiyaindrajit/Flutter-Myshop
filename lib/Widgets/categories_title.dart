@@ -21,7 +21,8 @@ class CategoriesTitle extends StatelessWidget {
       children: [
         Flexible(
           child: Padding(
-            padding: EdgeInsets.only(bottom : isSubtitle ? 0 : 10,top: isSubtitle ? 0 : 10,right: isSubtitle ? 10 : 0),
+            padding: EdgeInsets.only(
+                bottom: isSubtitle ? 0 : 10, top: isSubtitle ? 0 : 10, right: isSubtitle ? 10 : 0),
             child: Text(
               title,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

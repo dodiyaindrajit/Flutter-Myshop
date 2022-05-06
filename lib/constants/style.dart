@@ -17,8 +17,11 @@ class StyleConstants {
   );
 
   static TextStyle textStyle17 = TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold);
-  static TextStyle textStyleStrike16 =
-      TextStyle(decoration: TextDecoration.lineThrough, fontSize: 16.sp,decorationThickness: 2,);
+  static TextStyle textStyleStrike16 = TextStyle(
+    decoration: TextDecoration.lineThrough,
+    fontSize: 16.sp,
+    decorationThickness: 2,
+  );
 
   static TextStyle textStyle19 = TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold);
 }

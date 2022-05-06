@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:flutter_cart/flutter_cart.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
+import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/screens/cart/cart.dart';
 import 'package:myshop/screens/favorite/favorite.dart';
 import 'package:myshop/screens/home/home.dart';
@@ -12,12 +14,23 @@ import 'package:myshop/screens/home/widgets/app_Bar.dart';
 import 'package:myshop/screens/search/search.dart';
 import 'package:myshop/screens/setting/setting.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class AnimatedBottomBar extends StatelessWidget {
+class AnimatedBottomBar extends StatefulWidget {
+  static final advancedDrawerController = AdvancedDrawerController();
+  static final userCart = FlutterCart();
+
+  const AnimatedBottomBar({Key? key}) : super(key: key);
+
+  @override
+  State<AnimatedBottomBar> createState() => _AnimatedBottomBarState();
+}
+
+class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
-  static final advancedDrawerController = AdvancedDrawerController();
+  static bool show = true;
 
   final List<FaIcon> fontAwesomeIcons = [
     const FaIcon(FontAwesomeIcons.shop),
@@ -26,8 +39,6 @@ class AnimatedBottomBar extends StatelessWidget {
     const FaIcon(FontAwesomeIcons.solidHeart),
     const FaIcon(FontAwesomeIcons.person),
   ];
-
-  AnimatedBottomBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +67,7 @@ class AnimatedBottomBar extends StatelessWidget {
       return AdvancedDrawer(
         backdropColor: ColorConstants.kDarkGreen,
         openRatio: 0.5,
-        controller: advancedDrawerController,
+        controller: AnimatedBottomBar.advancedDrawerController,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         animateChildDecoration: true,
@@ -67,7 +78,11 @@ class AnimatedBottomBar extends StatelessWidget {
         ),
         child: Scaffold(
           backgroundColor: ColorConstants.kGray,
-          appBar: const PreferredSize(preferredSize: Size(0, 40), child: CustomeAppBar()),
+          appBar: PreferredSize(
+              preferredSize: const Size(0, 40),
+              child: CustomeAppBar(
+                callBackCartOpen: () => setState(() => _showBottomSheet(context)),
+              )),
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: StyleConstants.navigationBarStyleGray,
             sized: false,
@@ -93,7 +108,7 @@ class AnimatedBottomBar extends StatelessWidget {
                 navBarStyle: NavBarStyle.style6,
                 onItemSelected: (index) {},
                 backgroundColor: ColorConstants.kGray,
-                padding: const NavBarPadding.only(top:10),
+                padding: const NavBarPadding.only(top: 10),
                 bottomScreenMargin: 40,
               ),
             ),
@@ -166,5 +181,184 @@ class AnimatedBottomBar extends StatelessWidget {
         ),
       );
     });
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Container(
+            color: const Color.fromRGBO(0, 0, 0, 0.01),
+            child: DraggableScrollableSheet(
+              initialChildSize: 0.4,
+              minChildSize: 0.4,
+              maxChildSize: 0.90,
+              builder: (_, controller) {
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
+                    ),
+                  ),
+                  child: Consumer<CartProvider>(
+                    builder: (context, cart, child) {
+                      return Column(
+                        children: [
+                          Icon(
+                            Icons.remove,
+                            color: Colors.grey[600],
+                          ),
+                          Text(
+                            "Cart Items",
+                            style: StyleConstants.textStyle19
+                                .copyWith(color: ColorConstants.kDarkGreen),
+                          ),
+                          cart.getTotalAmount() > 0.0
+                              ? Column(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(32),
+                                        child: _CartList(),
+                                      ),
+                                    ),
+                                    const Divider(height: 2, thickness: 2, color: Colors.black),
+                                    //Cart Total
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Total',
+                                              style:
+                                                  TextStyle(color: Colors.grey, fontSize: 24.sp)),
+                                          Consumer<CartProvider>(
+                                              builder: (context, cart, child) => Text(
+                                                  '₹${cart.getTotalAmount().toString()}',
+                                                  style: StyleConstants.textStyle19))
+                                        ],
+                                      ),
+                                    ),
+                                    // Expanded(
+                                    //   child: AnimatedBottomBar.userCart.cartItem.length > 0
+                                    //       ? ListView.builder(
+                                    //           controller: controller,
+                                    //           padding: const EdgeInsets.all(10),
+                                    //           itemCount: AnimatedBottomBar.userCart.cartItem.length,
+                                    //           itemBuilder: (_, index) {
+                                    //             ProductDetails product = AnimatedBottomBar
+                                    //                 .userCart.cartItem[index].productDetails as ProductDetails;
+                                    //             return Card(
+                                    //               shape: RoundedRectangleBorder(
+                                    //                 borderRadius: BorderRadius.circular(15.0),
+                                    //               ),
+                                    //               elevation: 4,
+                                    //               child: Column(
+                                    //                 mainAxisSize: MainAxisSize.min,
+                                    //                 children: <Widget>[
+                                    //                   ListTile(
+                                    //                     leading: Container(
+                                    //                         width: 48,
+                                    //                         height: 48,
+                                    //                         child: CachedNetworkImage(
+                                    //                             imageUrl: product.imageUrl ??
+                                    //                                 "https://media.istockphoto.com/vectors/shopping-cart-icon-isolated-on-white-background-vector-id1206806317?k=20&m=1206806317&s=612x612&w=0&h=waK8qOHV2Fgz2ntEWHWBQtXpNDAQ_wdhd4tkTUz6tfE=")),
+                                    //                     title: Text(product.name ?? "Title",
+                                    //                         style: const TextStyle(fontSize: 20.0)),
+                                    //                     subtitle: Text(product.details ?? "Details",
+                                    //                         style: const TextStyle(fontSize: 16.0),
+                                    //                         maxLines: 3),
+                                    //                     trailing: Container(
+                                    //                       height: double.infinity,
+                                    //                       child: IconButton(
+                                    //                         icon: const Icon(Icons.delete,
+                                    //                             size: 30, color: Colors.red),
+                                    //                         onPressed: () {
+                                    //                           AnimatedBottomBar.userCart.deleteItemFromCart(index);
+                                    //                         },
+                                    //                       ),
+                                    //                     ),
+                                    //                     contentPadding: const EdgeInsets.all(10),
+                                    //                   ),
+                                    //                 ],
+                                    //               ),
+                                    //             );
+                                    //           },
+                                    //         )
+                                    //       : CachedNetworkImage(
+                                    //           imageUrl:
+                                    //               "https://sethisbakery.com/assets/website/images/empty-cart.png",
+                                    //           fit: BoxFit.fill,
+                                    //         ),
+                                    // ),
+                                    SafeArea(
+                                      child: MaterialButton(
+                                        color: ColorConstants.kDarkGreen,
+                                        padding: const EdgeInsets.all(10),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10)),
+                                        child: Text(
+                                          AnimatedBottomBar.userCart.cartItem.length > 0
+                                              ? "Place Order"
+                                              : "Let's Shop",
+                                          style: StyleConstants.textStyle17
+                                              .copyWith(color: ColorConstants.kPrimaryColor),
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : CachedNetworkImage(
+                                  imageUrl:
+                                      "https://sethisbakery.com/assets/website/images/empty-cart.png",
+                                  fit: BoxFit.cover,
+                                ),
+                        ],
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _CartList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var itemNameStyle = Theme.of(context).textTheme.headline6;
+    // This gets the current state of CartModel and also tells Flutter
+    // to rebuild this widget when CartModel notifies listeners (in other words,
+    // when it changes).
+    // var cart = context.watch<CartModel>();
+    var cartProvider = context.watch<CartProvider>();
+
+    return ListView.builder(
+      itemCount: cartProvider.flutterCart.cartItem.length,
+      itemBuilder: (context, index) => ListTile(
+        leading: const Icon(Icons.done),
+        trailing: IconButton(
+          icon: const Icon(Icons.remove_circle_outline),
+          onPressed: () {
+            cartProvider.decrementItemFromCartProvider(index);
+          },
+        ),
+        title: Text(
+          cartProvider.flutterCart.cartItem[index].productName.toString(),
+          style: itemNameStyle,
+        ),
+      ),
+    );
   }
 }

@@ -253,7 +253,8 @@ class _EditProfileState extends State<EditProfile> {
       child: Text("Next", style: TextStyle(color: ColorConstants.kDarkGreen, fontSize: 17.sp)),
       onPressed: () {
         // Increment activeStep, when the next button is tapped. However, check for upper bound.
-        _editProfilePageViewController.nextPage(duration: const Duration(seconds: 1), curve: Curves.ease);
+        _editProfilePageViewController.nextPage(
+            duration: const Duration(seconds: 1), curve: Curves.ease);
         if (activeStep < upperBound) {
           setState(() {
             activeStep++;

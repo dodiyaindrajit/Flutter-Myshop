@@ -49,8 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     title: Text(listTitle[index]),
                     leading: listIcons[index],
                     trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                    onTap: () {
-                    },
+                    onTap: () {},
                   ),
                 );
               },
