@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, duplicate_ignore
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
@@ -51,7 +50,7 @@ class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateM
             padding: const EdgeInsets.all(1),
             badgeColor: ColorConstants.kDarkGreen,
             child: IconButton(
-              icon: const FaIcon(FontAwesomeIcons.cartShopping, size: 20),
+              icon: const Icon(Icons.shopping_cart, size: 20),
               onPressed: () => widget.callBackCartOpen(),
               color: ColorConstants.kPrimaryColor,
               highlightColor: Colors.transparent,

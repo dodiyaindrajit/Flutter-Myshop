@@ -39,7 +39,19 @@ class _AddButtonState extends State<AddButton> {
     return MaterialButton(
       minWidth: 41.w,
       onPressed: _isInCart != 0
-          ? () {}
+          ? () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    "✔️ Item is already added to cart",
+                    style: StyleConstants.textStyle17.copyWith(color: ColorConstants.kPrimaryColor),
+                  ),
+                  duration: const Duration(milliseconds: 500),
+                  elevation: 5,
+                  backgroundColor: ColorConstants.kDarkGreen,
+                ),
+              );
+            }
           : () {
               _cartProvider.addToCart(widget.item);
               setState(() {});

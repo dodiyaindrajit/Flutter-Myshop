@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/Widgets/categories_title.dart';
 import 'package:myshop/Widgets/product_info.dart';
 import 'package:myshop/constants/colors.dart';
@@ -108,8 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fit: BoxFit.fill,
                                 placeholder: (context, url) =>
                                     Image.asset(ImageConstants.comingSoon),
-                                errorWidget: (context, url, error) =>
-                                    const FaIcon(FontAwesomeIcons.solidImages),
+                                errorWidget: (context, url, error) => const Icon(Icons.image),
                               ),
                             ),
                             // Image.network(i, fit: BoxFit.fill)),
@@ -181,8 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CachedNetworkImage(
               imageUrl: imageUrl,
-              placeholder: (context, url) => const FaIcon(FontAwesomeIcons.shop),
-              errorWidget: (context, url, error) => const FaIcon(FontAwesomeIcons.solidImages),
+              placeholder: (context, url) => const Icon(Icons.shopping_cart),
+              errorWidget: (context, url, error) => const Icon(Icons.image),
             ),
             Text(title, maxLines: 1)
           ],
@@ -252,14 +250,6 @@ class _HomeScreenState extends State<HomeScreen> {
             "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
           ],
           30000),
-    ];
-
-    final List<String> _imgList = [
-      "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg",
-      "https://m.media-amazon.com/images/I/61eXLgQt7kL._SX679_.jpg",
-      "https://m.media-amazon.com/images/I/61QCG3IQQbL._SX679_.jpg",
-      "https://m.media-amazon.com/images/I/717qIZm-xsL._SX679_.jpg",
-      "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
     ];
 
     List counter = [0, 1, 2, 3];

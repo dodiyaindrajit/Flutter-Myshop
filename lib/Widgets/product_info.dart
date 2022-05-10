@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:myshop/Widgets/add_button.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
@@ -42,6 +43,8 @@ class _ProductInfoState extends State<ProductInfo> {
 
   final List<String> _productSize = <String>["XS", "S", "X", "XX", "XXL"];
 
+  double rating = 3.5;
+
   @override
   void initState() {
     super.initState();
@@ -68,14 +71,30 @@ class _ProductInfoState extends State<ProductInfo> {
               ),
               child: Column(
                 children: [
-                  colorPicker(),
+                  price(item),
                   sizePicker(),
+                  colorPicker(),
+                  review(item),
+                  details(),
                   buyButton(item),
                 ],
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Padding price(Item item) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Price", style: StyleConstants.textStyle19),
+          Text("₹${item.price}", style: StyleConstants.textStyle19)
+        ],
       ),
     );
   }
@@ -369,5 +388,114 @@ class _ProductInfoState extends State<ProductInfo> {
         )
       ],
     );
+  }
+
+  Row details() {
+    return Row(children: [
+      Expanded(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 3.w),
+          child: Html(
+            data: """
+                        <h1>Product Details</h1>
+                        <table>
+                          <tr>
+                            <th>Brand</th>
+                            <td>Noise</td>
+                          </tr>
+                          <tr>
+                            <th>Color</th>
+                            <td>Rose Pink</td>
+                          </tr>
+                          <tr>
+                            <th>Connector Type</th>
+                            <td>USB</td>
+                          </tr>
+                          <tr>
+                            <th>Water Resistance Level</th>
+                            <td>Water Resistance</td>
+                          </tr>
+                          <tr>
+                            <th>Age Range</th>
+                            <td>10+</td>
+                          </tr>
+                        </table>
+                        """,
+            shrinkWrap: true,
+            style: {
+              "table": Style(width: 100.w),
+              "td": Style(width: 40.w, fontSize: FontSize.larger),
+              "th": Style(width: 40.w),
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Padding review(Item item) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Review", style: StyleConstants.textStyle19),
+          StarRating(
+            rating: rating,
+            onRatingChanged: (rating) => setState(() => this.rating = rating),
+            color: ColorConstants.kDarkGreen,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+typedef RatingChangeCallback = void Function(double rating);
+
+class StarRating extends StatelessWidget {
+  final int starCount;
+  final double rating;
+  final RatingChangeCallback onRatingChanged;
+  final Color color;
+
+  const StarRating(
+      {Key? key,
+      this.starCount = 5,
+      this.rating = .0,
+      required this.onRatingChanged,
+      required this.color})
+      : super(key: key);
+
+  Widget buildStar(BuildContext context, int index) {
+    Icon icon;
+    if (index >= rating) {
+      icon = Icon(
+        Icons.star_border,
+        color: color,
+      );
+    } else if (index > rating - 1 && index < rating) {
+      icon = Icon(
+        Icons.star_half,
+        color: color,
+      );
+    } else {
+      icon = Icon(
+        Icons.star,
+        color: color,
+      );
+    }
+    return InkResponse(
+      onTap: () {
+        print("Calling");
+        onRatingChanged(index + 1.0);
+      },
+      child: icon,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: List.generate(starCount, (index) => buildStar(context, index)));
   }
 }

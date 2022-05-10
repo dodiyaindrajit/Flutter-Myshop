@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_cart/flutter_cart.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/providers/cart_provider.dart';
@@ -30,14 +29,12 @@ class AnimatedBottomBar extends StatefulWidget {
 class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
-  static bool show = true;
-
-  final List<FaIcon> fontAwesomeIcons = [
-    const FaIcon(FontAwesomeIcons.shop),
-    const FaIcon(FontAwesomeIcons.cartShopping),
-    const FaIcon(FontAwesomeIcons.magnifyingGlass),
-    const FaIcon(FontAwesomeIcons.solidHeart),
-    const FaIcon(FontAwesomeIcons.person),
+  final List<Icon> fontAwesomeIcons = [
+    const Icon(Icons.shopping_basket_rounded),
+    const Icon(Icons.shopping_cart),
+    const Icon(Icons.search),
+    const Icon(Icons.favorite),
+    const Icon(Icons.person),
   ];
 
   @override
@@ -194,11 +191,13 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
           child: Container(
             color: const Color.fromRGBO(0, 0, 0, 0.01),
             child: DraggableScrollableSheet(
-              initialChildSize: 0.4,
+              snap: true,
+              initialChildSize: 0.8,
               minChildSize: 0.4,
-              maxChildSize: 0.90,
+              maxChildSize: 0.9,
               builder: (_, controller) {
                 return Container(
+                  padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -208,120 +207,114 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
                   ),
                   child: Consumer<CartProvider>(
                     builder: (context, cart, child) {
-                      return Column(
-                        children: [
-                          Icon(
-                            Icons.remove,
-                            color: Colors.grey[600],
-                          ),
-                          Text(
-                            "Cart Items",
-                            style: StyleConstants.textStyle19
-                                .copyWith(color: ColorConstants.kDarkGreen),
-                          ),
-                          cart.getTotalAmount() > 0.0
-                              ? Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(32),
-                                        child: _CartList(),
-                                      ),
-                                    ),
-                                    const Divider(height: 2, thickness: 2, color: Colors.black),
-                                    //Cart Total
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('Total',
-                                              style:
-                                                  TextStyle(color: Colors.grey, fontSize: 24.sp)),
-                                          Consumer<CartProvider>(
-                                              builder: (context, cart, child) => Text(
-                                                  '₹${cart.getTotalAmount().toString()}',
-                                                  style: StyleConstants.textStyle19))
-                                        ],
-                                      ),
-                                    ),
-                                    // Expanded(
-                                    //   child: AnimatedBottomBar.userCart.cartItem.length > 0
-                                    //       ? ListView.builder(
-                                    //           controller: controller,
-                                    //           padding: const EdgeInsets.all(10),
-                                    //           itemCount: AnimatedBottomBar.userCart.cartItem.length,
-                                    //           itemBuilder: (_, index) {
-                                    //             ProductDetails product = AnimatedBottomBar
-                                    //                 .userCart.cartItem[index].productDetails as ProductDetails;
-                                    //             return Card(
-                                    //               shape: RoundedRectangleBorder(
-                                    //                 borderRadius: BorderRadius.circular(15.0),
-                                    //               ),
-                                    //               elevation: 4,
-                                    //               child: Column(
-                                    //                 mainAxisSize: MainAxisSize.min,
-                                    //                 children: <Widget>[
-                                    //                   ListTile(
-                                    //                     leading: Container(
-                                    //                         width: 48,
-                                    //                         height: 48,
-                                    //                         child: CachedNetworkImage(
-                                    //                             imageUrl: product.imageUrl ??
-                                    //                                 "https://media.istockphoto.com/vectors/shopping-cart-icon-isolated-on-white-background-vector-id1206806317?k=20&m=1206806317&s=612x612&w=0&h=waK8qOHV2Fgz2ntEWHWBQtXpNDAQ_wdhd4tkTUz6tfE=")),
-                                    //                     title: Text(product.name ?? "Title",
-                                    //                         style: const TextStyle(fontSize: 20.0)),
-                                    //                     subtitle: Text(product.details ?? "Details",
-                                    //                         style: const TextStyle(fontSize: 16.0),
-                                    //                         maxLines: 3),
-                                    //                     trailing: Container(
-                                    //                       height: double.infinity,
-                                    //                       child: IconButton(
-                                    //                         icon: const Icon(Icons.delete,
-                                    //                             size: 30, color: Colors.red),
-                                    //                         onPressed: () {
-                                    //                           AnimatedBottomBar.userCart.deleteItemFromCart(index);
-                                    //                         },
-                                    //                       ),
-                                    //                     ),
-                                    //                     contentPadding: const EdgeInsets.all(10),
-                                    //                   ),
-                                    //                 ],
-                                    //               ),
-                                    //             );
-                                    //           },
-                                    //         )
-                                    //       : CachedNetworkImage(
-                                    //           imageUrl:
-                                    //               "https://sethisbakery.com/assets/website/images/empty-cart.png",
-                                    //           fit: BoxFit.fill,
-                                    //         ),
-                                    // ),
-                                    SafeArea(
-                                      child: MaterialButton(
-                                        color: ColorConstants.kDarkGreen,
-                                        padding: const EdgeInsets.all(10),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10)),
-                                        child: Text(
-                                          AnimatedBottomBar.userCart.cartItem.length > 0
-                                              ? "Place Order"
-                                              : "Let's Shop",
-                                          style: StyleConstants.textStyle17
-                                              .copyWith(color: ColorConstants.kPrimaryColor),
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : CachedNetworkImage(
-                                  imageUrl:
-                                      "https://sethisbakery.com/assets/website/images/empty-cart.png",
-                                  fit: BoxFit.cover,
+                      return cart.getTotalAmount() > 0.0
+                          ? Column(
+                              children: [
+                                Icon(
+                                  Icons.remove,
+                                  color: Colors.grey[600],
                                 ),
-                        ],
-                      );
+                                Text(
+                                  "Cart Items",
+                                  style: StyleConstants.textStyle19
+                                      .copyWith(color: ColorConstants.kDarkGreen),
+                                ),
+
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(32),
+                                    child: _CartList(),
+                                  ),
+                                ),
+                                const Divider(height: 2, thickness: 2, color: Colors.black),
+                                //Cart Total
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Total',
+                                          style: TextStyle(color: Colors.grey, fontSize: 24.sp)),
+                                      Consumer<CartProvider>(
+                                          builder: (context, cart, child) => Text(
+                                              '₹${cart.getTotalAmount().toString()}',
+                                              style: StyleConstants.textStyle19))
+                                    ],
+                                  ),
+                                ),
+                                // Expanded(
+                                //   child: AnimatedBottomBar.userCart.cartItem.length > 0
+                                //       ? ListView.builder(
+                                //           controller: controller,
+                                //           padding: const EdgeInsets.all(10),
+                                //           itemCount: AnimatedBottomBar.userCart.cartItem.length,
+                                //           itemBuilder: (_, index) {
+                                //             ProductDetails product = AnimatedBottomBar
+                                //                 .userCart.cartItem[index].productDetails as ProductDetails;
+                                //             return Card(
+                                //               shape: RoundedRectangleBorder(
+                                //                 borderRadius: BorderRadius.circular(15.0),
+                                //               ),
+                                //               elevation: 4,
+                                //               child: Column(
+                                //                 mainAxisSize: MainAxisSize.min,
+                                //                 children: <Widget>[
+                                //                   ListTile(
+                                //                     leading: Container(
+                                //                         width: 48,
+                                //                         height: 48,
+                                //                         child: CachedNetworkImage(
+                                //                             imageUrl: product.imageUrl ??
+                                //                                 "https://media.istockphoto.com/vectors/shopping-cart-icon-isolated-on-white-background-vector-id1206806317?k=20&m=1206806317&s=612x612&w=0&h=waK8qOHV2Fgz2ntEWHWBQtXpNDAQ_wdhd4tkTUz6tfE=")),
+                                //                     title: Text(product.name ?? "Title",
+                                //                         style: const TextStyle(fontSize: 20.0)),
+                                //                     subtitle: Text(product.details ?? "Details",
+                                //                         style: const TextStyle(fontSize: 16.0),
+                                //                         maxLines: 3),
+                                //                     trailing: Container(
+                                //                       height: double.infinity,
+                                //                       child: IconButton(
+                                //                         icon: const Icon(Icons.delete,
+                                //                             size: 30, color: Colors.red),
+                                //                         onPressed: () {
+                                //                           AnimatedBottomBar.userCart.deleteItemFromCart(index);
+                                //                         },
+                                //                       ),
+                                //                     ),
+                                //                     contentPadding: const EdgeInsets.all(10),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //             );
+                                //           },
+                                //         )
+                                //       : CachedNetworkImage(
+                                //           imageUrl:
+                                //               "https://sethisbakery.com/assets/website/images/empty-cart.png",
+                                //           fit: BoxFit.fill,
+                                //         ),
+                                // ),
+                                SafeArea(
+                                  child: MaterialButton(
+                                    color: ColorConstants.kDarkGreen,
+                                    padding: const EdgeInsets.all(10),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: Text(
+                                      "Place Order",
+                                      style: StyleConstants.textStyle17
+                                          .copyWith(color: ColorConstants.kPrimaryColor),
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ],
+                            )
+                          : CachedNetworkImage(
+                              imageUrl:
+                                  "https://sethisbakery.com/assets/website/images/empty-cart.png",
+                              fit: BoxFit.cover,
+                            );
                     },
                   ),
                 );

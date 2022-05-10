@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myshop/constants/colors.dart';
+import 'package:myshop/screens/login-signup/login.dart';
 import 'package:myshop/screens/setting/edit_profile.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -21,9 +22,9 @@ class _SettingScreenState extends State<SettingScreen> {
   ];
 
   final List listIcons = [
-    const FaIcon(FontAwesomeIcons.clockRotateLeft, color: Colors.green),
-    const FaIcon(FontAwesomeIcons.solidHeart, color: Colors.blue),
-    const FaIcon(FontAwesomeIcons.cartShopping, color: Colors.brown),
+    const Icon(Icons.history, color: Colors.green),
+    const Icon(Icons.favorite, color: Colors.blue),
+    const Icon(Icons.shopping_cart, color: Colors.brown),
     const Icon(Icons.privacy_tip_rounded, color: Colors.red),
     const Icon(Icons.exit_to_app_rounded, color: Colors.purple),
     const Icon(Icons.mobile_off_rounded, color: Colors.red),
@@ -41,21 +42,35 @@ class _SettingScreenState extends State<SettingScreen> {
               padding: const EdgeInsets.all(8),
               itemCount: listTitle.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  shape: const StadiumBorder(),
-                  clipBehavior: Clip.antiAlias,
-                  elevation: 2,
-                  child: ListTile(
-                    title: Text(listTitle[index]),
-                    leading: listIcons[index],
-                    trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                    onTap: () {},
-                  ),
-                );
+                return settingItems(index);
               },
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Card settingItems(int index) {
+    return Card(
+      shape: const StadiumBorder(),
+      clipBehavior: Clip.antiAlias,
+      elevation: 2,
+      child: ListTile(
+        title: Text(listTitle[index]),
+        leading: listIcons[index],
+        trailing: const Icon(Icons.arrow_forward_ios_rounded),
+        onTap: () async {
+          // await Preferences.setLogin(false);
+          if (index == 4 || index == 5) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => LoginScreen(), maintainState: false),
+            // );
+            Navigator.of(context, rootNavigator: true)
+                .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+          }
+        },
       ),
     );
   }

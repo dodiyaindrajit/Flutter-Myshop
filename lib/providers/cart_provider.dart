@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_cart/flutter_cart.dart';
 import 'package:flutter_cart/model/cart_model.dart';
 import 'package:flutter_cart/model/cart_response_wrapper.dart';
@@ -19,7 +19,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   bool cartIsEmpty() {
-    return flutterCart.cartItem.length == 0;
+    return flutterCart.cartItem.isEmpty;
   }
 
   deleteItemFromCart(int index) async {
@@ -47,7 +47,9 @@ class CartProvider extends ChangeNotifier {
     CartItem? cartItem = flutterCart.getSpecificItemFromCart(id);
 
     if (cartItem != null) {
-      print("Name ${cartItem.productDetails.name} Quantity ${cartItem.quantity}");
+      if (kDebugMode) {
+        print("Name ${cartItem.productDetails.name} Quantity ${cartItem.quantity}");
+      }
       return cartItem;
     }
     return cartItem;
@@ -62,10 +64,14 @@ class CartProvider extends ChangeNotifier {
   }
 
   printCartValue() {
-    flutterCart.cartItem.forEach((f) => {
-          print(f.productId),
-          print(f.quantity),
-        });
+    for (var f in flutterCart.cartItem) {
+      {
+        if (kDebugMode) {
+          print(f.productId);
+          print(f.quantity);
+        }
+      }
+    }
   }
 
   deleteAllCartProvider() {
