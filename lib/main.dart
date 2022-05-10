@@ -51,7 +51,7 @@ class MyShop extends StatelessWidget {
           "/": (context) => const SplashScreen(),
           "/animatedBar": (context) => const AnimatedBottomBar(),
           "/home": (context) => const HomeScreen(),
-          "/login": (context) => LoginScreen(),
+          "/login": (context) => const LoginScreen(),
         },
       ),
     );

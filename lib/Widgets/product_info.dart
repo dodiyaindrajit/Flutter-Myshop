@@ -487,7 +487,9 @@ class StarRating extends StatelessWidget {
     }
     return InkResponse(
       onTap: () {
-        print("Calling");
+        if (kDebugMode) {
+          print("Calling");
+        }
         onRatingChanged(index + 1.0);
       },
       child: icon,

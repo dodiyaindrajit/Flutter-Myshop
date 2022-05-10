@@ -8,9 +8,14 @@ const users = {
   'hunter@gmail.com': 'hunter',
 };
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   BorderRadius inputBorder = BorderRadius.circular(30.0);
 
   Duration get loginTime => const Duration(milliseconds: 2250);

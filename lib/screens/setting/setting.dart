@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
+import 'package:myshop/preference/preferences.dart';
 import 'package:myshop/screens/login-signup/login.dart';
 import 'package:myshop/screens/setting/edit_profile.dart';
 
@@ -61,14 +61,11 @@ class _SettingScreenState extends State<SettingScreen> {
         leading: listIcons[index],
         trailing: const Icon(Icons.arrow_forward_ios_rounded),
         onTap: () async {
-          // await Preferences.setLogin(false);
+          await Preferences.setLogin(false);
           if (index == 4 || index == 5) {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => LoginScreen(), maintainState: false),
-            // );
-            Navigator.of(context, rootNavigator: true)
-                .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+            Navigator.of(context, rootNavigator: true).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
           }
         },
       ),
