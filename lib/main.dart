@@ -4,6 +4,7 @@ import 'package:myshop/constants/colors.dart';
 import 'package:myshop/models/cart.dart';
 import 'package:myshop/models/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/providers/favourite_provider.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
 import 'package:myshop/screens/home/home.dart';
 import 'package:myshop/screens/login-signup/login.dart';
@@ -34,6 +35,9 @@ class MyShop extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavouriteProvider(),
         ),
       ],
       child: MaterialApp(

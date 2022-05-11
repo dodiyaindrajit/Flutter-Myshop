@@ -16,13 +16,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  BorderRadius inputBorder = BorderRadius.circular(30.0);
+  BorderRadius _inputBorder = BorderRadius.circular(30.0);
 
-  Duration get loginTime => const Duration(milliseconds: 2250);
+  Duration get _loginTime => const Duration(milliseconds: 2250);
 
   Future<String?> _authUser(LoginData data) {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
+    return Future.delayed(_loginTime).then((_) {
       if (!users.containsKey(data.name)) {
         return 'User not exists';
       }
@@ -35,14 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<String?> _signupUser(SignupData data) {
     debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
+    return Future.delayed(_loginTime).then((_) {
       return null;
     });
   }
 
   Future<String> _recoverPassword(String name) {
     debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
+    return Future.delayed(_loginTime).then((_) {
       if (!users.containsKey(name)) {
         return 'User not exists';
       }
@@ -60,6 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
       navigateBackAfterRecovery: true,
       initialAuthMode: AuthMode.login,
       scrollable: true,
+      disableCustomPageTransformer: false,
+      userType: LoginUserType.phone,
+
       onSubmitAnimationCompleted: () async {
         await Preferences.setLogin(true);
         Navigator.pushReplacementNamed(context, "/animatedBar");
@@ -71,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
           label: 'Google',
           callback: () async {
             debugPrint('start google sign in');
-            await Future.delayed(loginTime);
+            await Future.delayed(_loginTime);
             debugPrint('stop google sign in');
             return null;
           },
@@ -81,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
           label: 'Facebook',
           callback: () async {
             debugPrint('start facebook sign in');
-            await Future.delayed(loginTime);
+            await Future.delayed(_loginTime);
             debugPrint('stop facebook sign in');
             return null;
           },
@@ -128,20 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
           icon: const Icon(Icons.call),
         )
       ],
-      // messages: LoginMessages(
-      //   userHint: 'User',
-      //   passwordHint: 'Pass',
-      //   confirmPasswordHint: 'Confirm',
-      //   loginButton: 'LOG IN',
-      //   signupButton: 'REGISTER',
-      //   forgotPasswordButton: 'Forgot huh?',
-      //   recoverPasswordButton: 'HELP ME',
-      //   goBackButton: 'GO BACK',
-      //   confirmPasswordError: 'Not match!',
-      //   recoverPasswordDescription:
-      //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-      //   recoverPasswordSuccess: 'Password rescued successfully',
-      // ),
       theme: LoginTheme(
         primaryColor: ColorConstants.kDarkGreen,
         titleStyle: const TextStyle(
@@ -168,19 +157,19 @@ class _LoginScreenState extends State<LoginScreen> {
           hintStyle: const TextStyle(fontSize: 15, color: ColorConstants.kBlack),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.grey, width: 2),
-            borderRadius: inputBorder,
+            borderRadius: _inputBorder,
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorConstants.kDarkGreen, width: 3),
-            borderRadius: inputBorder,
+            borderRadius: _inputBorder,
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red.shade700, width: 3),
-            borderRadius: inputBorder,
+            borderRadius: _inputBorder,
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorConstants.kDarkGreen, width: 3),
-            borderRadius: inputBorder,
+            borderRadius: _inputBorder,
           ),
         ),
         buttonTheme: const LoginButtonTheme(

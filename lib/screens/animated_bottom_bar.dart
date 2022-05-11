@@ -19,6 +19,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class AnimatedBottomBar extends StatefulWidget {
   static final advancedDrawerController = AdvancedDrawerController();
   static final userCart = FlutterCart();
+  static final PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   const AnimatedBottomBar({Key? key}) : super(key: key);
 
@@ -27,7 +28,7 @@ class AnimatedBottomBar extends StatefulWidget {
 }
 
 class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+
 
   final List<Icon> fontAwesomeIcons = [
     const Icon(Icons.shopping_basket_rounded),
@@ -86,7 +87,7 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
             child: SafeArea(
               child: PersistentTabView(
                 context,
-                controller: _controller,
+                controller: AnimatedBottomBar.controller,
                 screens: _buildScreens(),
                 items: _navBarsItems(),
                 confineInSafeArea: true,

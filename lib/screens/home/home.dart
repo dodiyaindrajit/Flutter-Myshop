@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myshop/Widgets/categories_title.dart';
 import 'package:myshop/Widgets/product_info.dart';
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               WidgetConst.spacer(10),
               category(),
               countDownDeals(context),
+              specialize(context),
             ],
           ),
         ),
@@ -259,6 +261,18 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: ColorConstants.kPrimaryColor,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [
+              0.01,
+              0.16,
+            ],
+            colors: [
+              ColorConstants.kDarkGreen.withOpacity(0.8),
+              ColorConstants.kPrimaryColor
+            ],
+          )
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,22 +299,112 @@ class _HomeScreenState extends State<HomeScreen> {
                           screen: ProductInfo(item: _productInfo[count], index: count),
                           settings: const RouteSettings()),
                       item: _productInfo[count]),
-                // ProductImage(
-                //     onTap: () => pushNewScreenWithRouteSettings(context,
-                //         screen: ProductInfo(imageUrl: _productInfo[1]),
-                //         settings: const RouteSettings()),
-                //     item: _productInfo[1]),
-                // ProductImage(
-                //     onTap: () => pushNewScreenWithRouteSettings(context,
-                //         screen: ProductInfo(imageUrl: _productInfo[2]),
-                //         settings: const RouteSettings()),
-                //     item: _productInfo[2]),
-                // ProductImage(
-                //     onTap: () => pushNewScreenWithRouteSettings(context,
-                //         screen: ProductInfo(imageUrl: _productInfo[3]),
-                //         settings: const RouteSettings()),
-                //     item: _productInfo[3]),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container specialize(BuildContext context) {
+    List _productInfo = [
+      const Item(
+          0,
+          "Nike",
+          "Good Nike",
+          [
+            "https://images-eu.ssl-images-amazon.com/images/I/314u7H8PztL._AC_SX184_.jpg",
+            "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61eXLgQt7kL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61QCG3IQQbL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/717qIZm-xsL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
+          ],
+          1200),
+      const Item(
+          1,
+          "Mobile",
+          "Good Nike",
+          [
+            "https://images-eu.ssl-images-amazon.com/images/I/41SxnvtbmvL._AC_SX184_.jpg",
+            "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61eXLgQt7kL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61QCG3IQQbL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/717qIZm-xsL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
+          ],
+          12000),
+      const Item(
+          2,
+          "Clocks",
+          "Good Nike",
+          [
+            "https://m.media-amazon.com/images/I/61rhip4mVWS._AC_UL320_.jpg",
+            "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61eXLgQt7kL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61QCG3IQQbL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/717qIZm-xsL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
+          ],
+          2000),
+      const Item(
+          3,
+          "TV",
+          "Good Nike",
+          [
+            "https://images-eu.ssl-images-amazon.com/images/I/41Rn11i8xPL._AC_SX184_.jpg",
+            "https://m.media-amazon.com/images/I/81zLNgcvlaL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61eXLgQt7kL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/61QCG3IQQbL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/717qIZm-xsL._SX679_.jpg",
+            "https://m.media-amazon.com/images/I/81+NQQYTwPL._SX679_.jpg"
+          ],
+          30000),
+    ];
+
+    List counter = [0, 1, 2, 3];
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: ColorConstants.kPrimaryColor,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [
+              0.01,
+              0.2,
+            ],
+            colors: [
+              ColorConstants.kDarkGreen.withOpacity(0.8),
+              ColorConstants.kPrimaryColor
+            ],
+          )
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CategoriesTitle(
+            title: "Men's collections",
+            isSubtitle: true,
+            subTitle: "up to 50% off",
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: 200.0,
+            child: ListView.builder(
+              padding: EdgeInsets.all(10),
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 4,
+              itemBuilder: (BuildContext context, int index) => ProductImage(
+                  onTap: () => pushNewScreenWithRouteSettings(context,
+                      screen: ProductInfo(item: _productInfo[index], index: index),
+                      settings: const RouteSettings()),
+                  item: _productInfo[index]),
             ),
           ),
         ],
@@ -332,10 +436,10 @@ class ProductImage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: CachedNetworkImage(imageUrl: item.imageUrl.first),
+            child: CachedNetworkImage(imageUrl: item.imageUrl.first,width: 35.w),
           ),
-          if (title != " ") Text("ProductImg ", maxLines: oldPrice != "" ? 2 : 3),
-          if (title != " ")
+          if (title != "") Text("ProductImg ", maxLines: oldPrice != "" ? 2 : 3),
+          if (title != "")
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

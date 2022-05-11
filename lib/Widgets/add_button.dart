@@ -4,6 +4,7 @@ import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/models/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/providers/favourite_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,12 +19,14 @@ class AddButton extends StatefulWidget {
 
 class _AddButtonState extends State<AddButton> {
   late CartProvider _cartProvider;
+  late FavouriteProvider _favouriteProvider;
   late CartItem? _cartItem;
   late int _isInCart;
 
   @override
   void initState() {
     _cartProvider = Provider.of<CartProvider>(context, listen: false);
+    _favouriteProvider = Provider.of<FavouriteProvider>(context, listen: false);
     super.initState();
   }
 
@@ -54,6 +57,7 @@ class _AddButtonState extends State<AddButton> {
             }
           : () {
               _cartProvider.addToCart(widget.item);
+              _favouriteProvider.deleteItemFromFavouriteByItem(widget.item);
               setState(() {});
             },
       color: Colors.amber,

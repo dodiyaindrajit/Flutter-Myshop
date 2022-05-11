@@ -7,11 +7,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:myshop/Widgets/add_button.dart';
+import 'package:myshop/Widgets/favourite_button.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
-import 'package:myshop/flutter/extensions.dart';
+import 'package:myshop/extensions/extensions.dart';
 import 'package:myshop/models/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/providers/favourite_provider.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:share_plus/share_plus.dart';
@@ -62,7 +65,7 @@ class _ProductInfoState extends State<ProductInfo> {
         child: Column(
           children: [
             productHeader(),
-            imageSlider(),
+            imageSlider(item),
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -117,7 +120,7 @@ class _ProductInfoState extends State<ProductInfo> {
     );
   }
 
-  Column imageSlider() {
+  Column imageSlider(Item item) {
     return Column(
       children: [
         //Images and Buttons
@@ -146,7 +149,16 @@ class _ProductInfoState extends State<ProductInfo> {
                       for (var i in widget.item.imageUrl)
                         ClipRRect(
                           borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                          child: CachedNetworkImage(imageUrl: i),
+                          child: PinchZoom(
+                              resetDuration: const Duration(milliseconds: 100),
+                              maxScale: 2.5,
+                              onZoomStart: () {
+                                print('Start zooming');
+                              },
+                              onZoomEnd: () {
+                                print('Stop zooming');
+                              },
+                              child: CachedNetworkImage(imageUrl: i)),
                         )
                     ],
                   ),
@@ -195,18 +207,9 @@ class _ProductInfoState extends State<ProductInfo> {
                         ),
                         shape: const CircleBorder(),
                       ),
-                      MaterialButton(
-                        onPressed: () {},
-                        color: ColorConstants.kGray,
-                        minWidth: 10,
-                        padding: const EdgeInsets.all(5),
-                        child: const Icon(
-                          Icons.favorite,
-                          size: 25.0,
-                          color: ColorConstants.kDarkGreen,
-                        ),
-                        shape: const CircleBorder(),
-                      ),
+                      Consumer<FavouriteProvider>(builder: (context, cart, child) {
+                        return FavouriteButton(item: item);
+                      }),
                     ],
                   )
                 ],
