@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myshop/Widgets/categories_title.dart';
 import 'package:myshop/constants/colors.dart';
+import 'package:myshop/screens/Widgets/reusable_widgets/categories_heading.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class CustomeTabView extends StatefulWidget {
-  const CustomeTabView({
-    Key? key,
-  }) : super(key: key);
+class CustomeTabView extends StatelessWidget {
+  const CustomeTabView({Key? key}) : super(key: key);
 
-  @override
-  State<CustomeTabView> createState() => _CustomeTabViewState();
-}
-
-class _CustomeTabViewState extends State<CustomeTabView> {
-  bool isLike = false;
+  final bool isLike = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +16,7 @@ class _CustomeTabViewState extends State<CustomeTabView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //ACTIVEWEAR
-          CategoriesTitle(
+          CategoriesHeading(
             title: 'ACTIVEWEAR',
             subTitle: 'SHOP NOW',
             onPressed: () {},
@@ -58,11 +51,7 @@ class _CustomeTabViewState extends State<CustomeTabView> {
                                   splashColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   color: isLike ? ColorConstants.kRed : ColorConstants.kBlack,
-                                  onPressed: () {
-                                    setState(() {
-                                      isLike = !isLike;
-                                    });
-                                  },
+                                  onPressed: () {},
                                 )
                               ],
                             ),

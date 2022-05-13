@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
-import 'package:myshop/screens/home/widgets/tab_view.dart';
+import 'package:myshop/screens/cart/widgets/tab_view.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

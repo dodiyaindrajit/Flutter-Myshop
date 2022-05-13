@@ -4,14 +4,9 @@ import 'package:myshop/preference/preferences.dart';
 import 'package:myshop/screens/login-signup/login.dart';
 import 'package:myshop/screens/setting/edit_profile.dart';
 
-class SettingScreen extends StatefulWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+class SettingScreen extends StatelessWidget {
+  SettingScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SettingScreen> createState() => _SettingScreenState();
-}
-
-class _SettingScreenState extends State<SettingScreen> {
   final List<String> listTitle = <String>[
     'My Order',
     'My Wishlist',
@@ -42,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
               padding: const EdgeInsets.all(8),
               itemCount: listTitle.length,
               itemBuilder: (BuildContext context, int index) {
-                return settingItems(index);
+                return settingItems(index, context);
               },
             ),
           )
@@ -51,7 +46,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Card settingItems(int index) {
+  Card settingItems(int index, BuildContext context) {
     return Card(
       shape: const StadiumBorder(),
       clipBehavior: Clip.antiAlias,
@@ -64,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
           await Preferences.setLogin(false);
           if (index == 4 || index == 5) {
             Navigator.of(context, rootNavigator: true).pushReplacement(
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
+              MaterialPageRoute(builder: (context) => LoginScreen()),
             );
           }
         },

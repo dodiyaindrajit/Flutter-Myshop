@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:myshop/models/catelog.dart';
+import 'package:myshop/models/cart/catelog.dart';
 
-class FavouriteModel extends ChangeNotifier {
+class CartModel extends ChangeNotifier {
   /// The private field backing [catalog].
   late CatalogModel _catalog;
 
@@ -39,10 +39,4 @@ class FavouriteModel extends ChangeNotifier {
     // you change the model.
     notifyListeners();
   }
-}
-
-class Notes{
-  String title;
-  String description;
-  Notes(this.title,this.description);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
-import 'package:myshop/models/catelog.dart';
+import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/favourite_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +37,8 @@ class _FavouriteButtonState extends State<FavouriteButton> {
   Widget build(BuildContext context) {
     _isInFavourite = _checkItemIsInFavourite();
     return MaterialButton(
-      color: ColorConstants.kGray,
+      color: ColorConstants.kPrimaryColor,
+      elevation: 7,
       minWidth: 10,
       padding: const EdgeInsets.all(5),
       child: Icon(
@@ -65,18 +66,5 @@ class _FavouriteButtonState extends State<FavouriteButton> {
               setState(() {});
             },
     );
-
-    // return MaterialButton(
-    //   onPressed: () {},
-    //   color: ColorConstants.kGray,
-    //   minWidth: 10,
-    //   padding: const EdgeInsets.all(5),
-    //   child: const Icon(
-    //     Icons.favorite,
-    //     size: 25.0,
-    //     color: ColorConstants.kDarkGreen,
-    //   ),
-    //   shape: const CircleBorder(),
-    // );
   }
 }

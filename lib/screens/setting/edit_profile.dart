@@ -128,7 +128,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.text, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                       Row(
                                         children: [
                                           textFiled("Enter Your Email", "Email",
@@ -138,7 +138,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.phone, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                     ],
                                   ),
                                   Column(
@@ -152,7 +152,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.text, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                       Row(
                                         children: [
                                           textFiled("Enter Your Email", "Email",
@@ -162,7 +162,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.phone, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                     ],
                                   ),
                                   Column(
@@ -176,7 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.text, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                       Row(
                                         children: [
                                           textFiled("Enter Your Email", "Email",
@@ -186,7 +186,7 @@ class _EditProfileState extends State<EditProfile> {
                                               TextInputType.phone, emailController),
                                         ],
                                       ),
-                                      WidgetConst.spacer(2.h),
+                                      WidgetConst.heightSpacer(2.h),
                                     ],
                                   ),
                                 ],

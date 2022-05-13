@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:myshop/Widgets/add_button.dart';
+import 'package:myshop/screens/Widgets/add_button.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/providers/cart_provider.dart';
@@ -49,7 +49,6 @@ class _FavouriteListState extends State<_FavouriteList> {
   Widget build(BuildContext context) {
     return Consumer<FavouriteProvider>(
       builder: (context, data, child) {
-        print(data.getCartItems().length);
         return data.getCartItems().isNotEmpty
             ? SizedBox(
                 height: 85.h,
@@ -168,7 +167,7 @@ class _FavouriteListState extends State<_FavouriteList> {
                             ),
                             MaterialButton(
                                 onPressed: () {
-                                  AnimatedBottomBar.controller.jumpToTab(0);
+                                  AnimatedBottomBar.bottomBarTabController.jumpToTab(0);
                                 },
                                 color: ColorConstants.kDarkGreen,
                                 padding: const EdgeInsets.all(10),

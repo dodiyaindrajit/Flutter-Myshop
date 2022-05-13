@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CategoriesTitle extends StatelessWidget {
+class CategoriesHeading extends StatelessWidget {
   final String title;
   final String subTitle;
   final Function() onPressed;
   final bool isSubtitle;
 
-  const CategoriesTitle(
+  const CategoriesHeading(
       {Key? key,
       required this.title,
       this.subTitle = "SEE ALL",

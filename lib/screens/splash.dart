@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   static bool isNotNavigate = true;
-
+  //isLogin flag maintain user login reference
   bool isLogin = false;
 
   @override
@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
+  //This function will get login flag value stored in shared preference
   checkLogin() async {
     isLogin = await Preferences.isLogin();
   }
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     if (isNotNavigate) {
       isNotNavigate = false;
-
+      //this function is work like a timer it will navigate new page after 2 seconds.
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(context, isLogin ? "/animatedBar" : "/login");
       });

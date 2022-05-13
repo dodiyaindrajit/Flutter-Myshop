@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_cart/flutter_cart.dart';
 import 'package:flutter_cart/model/cart_model.dart';
 import 'package:flutter_cart/model/cart_response_wrapper.dart';
-import 'package:myshop/models/catelog.dart';
+import 'package:myshop/models/cart/catelog.dart';
 
 class CartProvider extends ChangeNotifier {
   var flutterCart = FlutterCart();

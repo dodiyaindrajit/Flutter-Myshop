@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cart/model/cart_model.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
-import 'package:myshop/models/catelog.dart';
+import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/providers/favourite_provider.dart';
 import 'package:provider/provider.dart';

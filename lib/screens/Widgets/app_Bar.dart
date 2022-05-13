@@ -3,22 +3,13 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/screens/Widgets/cart_box.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
 import 'package:provider/provider.dart';
 
-class CustomeAppBar extends StatefulWidget {
-  const CustomeAppBar({
-    Key? key,
-    required this.callBackCartOpen,
-  }) : super(key: key);
+class CustomeAppBar extends StatelessWidget {
+  const CustomeAppBar({Key? key}) : super(key: key);
 
-  final Function callBackCartOpen;
-
-  @override
-  State<CustomeAppBar> createState() => _CustomeAppBarState();
-}
-
-class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -51,7 +42,7 @@ class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateM
             badgeColor: ColorConstants.kDarkGreen,
             child: IconButton(
               icon: const Icon(Icons.shopping_cart, size: 20),
-              onPressed: () => widget.callBackCartOpen(),
+              onPressed: () => _showBottomSheet(context),
               color: ColorConstants.kPrimaryColor,
               highlightColor: Colors.transparent,
               splashColor: Colors.transparent,
@@ -63,6 +54,17 @@ class _CustomeAppBarState extends State<CustomeAppBar> with TickerProviderStateM
           style: TextStyle(color: ColorConstants.kPrimaryColor),
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return const CartBoxList();
+      },
     );
   }
 }
