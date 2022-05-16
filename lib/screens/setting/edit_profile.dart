@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/constants/widgets.dart';
@@ -15,6 +18,7 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   bool _isEditProfile = false;
   bool _isEditFieldVisible = false;
+  File? image;
 
   final PageController _editProfilePageViewController = PageController();
 
@@ -34,6 +38,18 @@ class _EditProfileState extends State<EditProfile> {
       return;
     }
     _formKey.currentState!.save();
+  }
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+      print(this.image);
+    } catch (e) {
+      print("Error While Selecting Image : $e");
+    }
   }
 
   @override
@@ -74,15 +90,58 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(80)),
                 ),
-                child: ClipOval(
-                  child: SizedBox.fromSize(
-                    size: Size.fromRadius(14.w),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          "https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=",
-                      fit: BoxFit.cover,
+                child: Stack(
+                  children: [
+                    ClipOval(
+                      child: SizedBox.fromSize(
+                        size: Size.fromRadius(14.w),
+                        child: image == null
+                            ? CachedNetworkImage(
+                                imageUrl:
+                                    "https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=",
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(image!,fit: BoxFit.cover),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 1,
+                      right: 1,
+                      child: Container(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.camera,
+                            color: ColorConstants.kBlack,
+                            size: 20,
+                          ),
+                          padding: EdgeInsets.all(2),
+                          onPressed: () => pickImage(),
+                        ),
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 3,
+                              color: Colors.white,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                50,
+                              ),
+                            ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: const Offset(2, 4),
+                                color: Colors.black.withOpacity(
+                                  0.3,
+                                ),
+                                blurRadius: 3,
+                              ),
+                            ]),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Column(

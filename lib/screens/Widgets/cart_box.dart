@@ -43,7 +43,9 @@ class CartBoxList extends StatelessWidget {
                                 style: StyleConstants.textStyle19
                                     .copyWith(color: ColorConstants.kDarkGreen)),
                             Expanded(
-                              child: Padding(padding: const EdgeInsets.all(15), child: _CartList()),
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 1),
+                                  child: _CartList()),
                             ),
                             const Divider(height: 2, thickness: 2, color: Colors.black),
                             //Cart Total
@@ -91,54 +93,95 @@ class CartBoxList extends StatelessWidget {
   }
 }
 
-class _CartList extends StatelessWidget {
+class _CartList extends StatefulWidget {
+  @override
+  State<_CartList> createState() => _CartListState();
+}
+
+class _CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     var cartProvider = context.watch<CartProvider>();
-
     return ListView.builder(
       padding: EdgeInsets.zero,
       itemCount: cartProvider.flutterCart.cartItem.length,
       itemBuilder: (_, index) {
         CartItem product = cartProvider.flutterCart.cartItem[index];
         Item item = product.productDetails as Item;
+        int itemQut = product.quantity;
         return Card(
+          clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
           elevation: 4,
-          child: Column(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              ListTile(
-                leading: SizedBox(
-                  width: 55,
-                  height: 55,
-                  child: CachedNetworkImage(imageUrl: item.imageUrl.first),
-                ),
-                title: Text(product.productName ?? "Title", style: StyleConstants.textStyle19),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 3),
-                    Text("Price: ${item.price.toString()}", style: StyleConstants.textStyle17),
-                    const SizedBox(height: 3),
-                    Text(
-                        item.details +
-                            "Either the assertion indicates an error in the framework itself, or we should provide substantially more information in this error message to help you determine and fix the underlying cause.",
-                        style: const TextStyle(fontSize: 16.0),
-                        maxLines: 3),
-                  ],
-                ),
-                trailing: SizedBox(
-                  height: double.infinity,
-                  child: IconButton(
-                    icon: const Icon(Icons.delete, size: 30, color: Colors.red),
-                    onPressed: () => cartProvider.decrementItemFromCartProvider(index),
+              Flexible(
+                flex: 2,
+                child: CachedNetworkImage(imageUrl: item.imageUrl.first),
+              ),
+              Flexible(
+                flex: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(product.productName ?? "Title", style: StyleConstants.textStyle19),
+                      const SizedBox(height: 3),
+                      Text("Price: ${item.price.toString()}", style: StyleConstants.textStyle17),
+                      const SizedBox(height: 3),
+                      Text(
+                          item.details +
+                              "Either the assertion indicates an error in the framework itself, or we should provide substantially more information in this error message to help you determine and fix the underlying cause.",
+                          style: const TextStyle(fontSize: 16.0),
+                          maxLines: 3),
+                    ],
                   ),
                 ),
-                contentPadding: const EdgeInsets.all(5),
-                minVerticalPadding: 1,
+              ),
+              Flexible(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
+                          cartProvider.deleteItemFromCart(index);
+                        }),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: IconButton(
+                              icon: const Icon(Icons.remove, color: Colors.red),
+                              padding: const EdgeInsets.all(0),
+                              onPressed: () {
+                                cartProvider.decrementItemFromCartProvider(index);
+                              }),
+                        ),
+                        Flexible(
+                            child: Text(
+                          product.quantity.toString(),
+                          style: StyleConstants.textStyle17,
+                        )),
+                        Flexible(
+                          child: IconButton(
+                              icon: const Icon(Icons.add, color: Colors.green),
+                              padding: const EdgeInsets.all(0),
+                              onPressed: () {
+                                cartProvider.incrementItemToCartProvider(index);
+                              }),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ],
           ),

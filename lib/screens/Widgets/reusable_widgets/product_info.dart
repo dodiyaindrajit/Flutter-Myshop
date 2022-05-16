@@ -14,6 +14,7 @@ import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/providers/favourite_provider.dart';
 import 'package:myshop/screens/Widgets/add_button.dart';
+import 'package:myshop/screens/Widgets/reusable_widgets/buy_now_button.dart';
 import 'package:myshop/screens/home/favourite_button.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:provider/provider.dart';
@@ -392,19 +393,7 @@ class _ProductInfoState extends State<ProductInfo> {
         Consumer<CartProvider>(builder: (context, cart, child) {
           return AddButton(item: item);
         }),
-        MaterialButton(
-          minWidth: 41.w,
-          onPressed: () {},
-          color: ColorConstants.kDarkGreen,
-          padding: const EdgeInsets.all(10),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
-          child: Text(
-            "Buy Now",
-            style: StyleConstants.textStyle17.copyWith(color: ColorConstants.kPrimaryColor),
-          ),
-        )
+        const BuyNowButton()
       ],
     );
   }

@@ -23,13 +23,13 @@ dependencies:
   awesome_select: ^5.2.0 #Color-Size-Selector
   flutter_cart: ^0.0.7 #Add to cart Button
   pinch_zoom: ^1.0.0 #Zoom Image By Finger
+  image_picker: ^0.8.5+3 #pic image from storage/Camera
 
   #Animation
   lottie: ^1.3.0 #Animation Provider (json)
   badges: ^2.0.2
   slide_countdown: ^0.2.4
   flutter_advanced_drawer: ^1.3.2
-  im_stepper: ^0.1.3
   flutter_login: ^3.2.0
 
   #BackEnd
