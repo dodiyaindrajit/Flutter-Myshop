@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/constants/widgets.dart';
-import 'package:myshop/screens/Widgets/app_Bar.dart';
+import 'package:myshop/screens/order/payment_screen.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);
@@ -9,18 +11,19 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(preferredSize: Size(0, 40), child: CustomeAppBar()),
+      appBar: AppBar(toolbarHeight: 40, title: const Text("Delivery Details"),),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Select a delivery address",
-                style: StyleConstants.textStyle19,
+                style: StyleConstants.textStyle19.copyWith(fontSize: 20.sp),
               ),
+              WidgetConst.heightSpacer(10),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -35,7 +38,7 @@ class OrderScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "RECENTLY USED\nKARMALN TECHNOLOGY",
+                                  "Recently Used\nKARMALN TECHNOLOGY",
                                   style: StyleConstants.textStyle17,
                                 ),
                                 WidgetConst.heightSpacer(5),
@@ -56,7 +59,14 @@ class OrderScreen extends StatelessWidget {
                         color: Colors.amber,
                         minWidth: double.infinity,
                         height: 40,
-                        onPressed: () {},
+                        onPressed: () {
+                          pushNewScreen(
+                            context,
+                            screen: const PaymentScreen(),
+                            withNavBar: false,
+                            pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                          );
+                        },
                       ),
                       MaterialButton(
                         child: Text(
@@ -123,7 +133,9 @@ class OrderScreen extends StatelessWidget {
                               color: Colors.amber,
                               minWidth: double.infinity,
                               height: 40,
-                              onPressed: () {},
+                              onPressed: () {
+
+                              },
                             ),
                             MaterialButton(
                               child: Text(

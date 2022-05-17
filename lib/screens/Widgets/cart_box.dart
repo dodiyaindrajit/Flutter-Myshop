@@ -108,7 +108,6 @@ class _CartListState extends State<_CartList> {
       itemBuilder: (_, index) {
         CartItem product = cartProvider.flutterCart.cartItem[index];
         Item item = product.productDetails as Item;
-        int itemQut = product.quantity;
         return Card(
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
