@@ -5,9 +5,8 @@ import 'package:myshop/constants/style.dart';
 import 'package:myshop/constants/widgets.dart';
 import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
-import 'package:myshop/screens/order/google_pay_button.dart';
+import 'package:myshop/screens/order/cash_on_delivery.dart';
 import 'package:myshop/screens/order/razor_pay_button.dart';
-import 'package:myshop/screens/order/stripe_pay_button.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -34,6 +33,7 @@ class PaymentScreen extends StatelessWidget {
               ),
               WidgetConst.heightSpacer(10),
               Card(
+                elevation: 5,
                 borderOnForeground: false,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -48,7 +48,7 @@ class PaymentScreen extends StatelessWidget {
                       WidgetConst.heightSpacer(5),
                       Consumer<CartProvider>(
                           builder: (context, cart, child) => SizedBox(
-                              height: (cart.getCartItems().length * 8.h), child: _OrderList())),
+                              height: (cart.getCartItems().length * 9.h), child: _OrderList())),
                       const Divider(height: 2, thickness: 2, color: Colors.black),
                       //Cart Total
                       Padding(
@@ -68,7 +68,9 @@ class PaymentScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              WidgetConst.heightSpacer(10),
               Card(
+                elevation: 5,
                 borderOnForeground: false,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -82,9 +84,8 @@ class PaymentScreen extends StatelessWidget {
                           style: StyleConstants.textStyle19,
                         ),
                         WidgetConst.heightSpacer(5),
-                        GooglePayButton(totalAmount: cart.getTotalAmount()),
                         RazorPayButton(totalAmount: cart.getTotalAmount()),
-                        StripePayButton(totalAmount: cart.getTotalAmount()),
+                        CashOnDeliveryButton(totalAmount: cart.getTotalAmount()),
                       ],
                     ),
                   ),
@@ -108,7 +109,6 @@ class _OrderListState extends State<_OrderList> {
   Widget build(BuildContext context) {
     var cartProvider = context.watch<CartProvider>();
     return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       itemCount: cartProvider.flutterCart.cartItem.length,
       itemBuilder: (_, index) {
@@ -120,7 +120,8 @@ class _OrderListState extends State<_OrderList> {
           title:
               Text(product.productName ?? "Title", style: StyleConstants.textStyle19, maxLines: 1),
           subtitle: Text(item.details, style: const TextStyle(fontSize: 16.0), maxLines: 2),
-          trailing: Text("₹ ${item.price.toString()}", style: StyleConstants.textStyle17),
+          trailing: Text("₹ ${item.price.toString()} x ${product.quantity}",
+              style: StyleConstants.textStyle17),
         );
       },
     );

@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:myshop/screens/Widgets/add_button.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/providers/cart_provider.dart';
 import 'package:myshop/providers/favourite_provider.dart';
+import 'package:myshop/screens/Widgets/add_button.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class MyOrder extends StatelessWidget {
+  const MyOrder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class FavoriteScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _FavouriteList(),
+              _MyOrderList(),
             ],
           ),
         ),
@@ -31,12 +31,12 @@ class FavoriteScreen extends StatelessWidget {
   }
 }
 
-class _FavouriteList extends StatefulWidget {
+class _MyOrderList extends StatefulWidget {
   @override
-  State<_FavouriteList> createState() => _FavouriteListState();
+  State<_MyOrderList> createState() => _MyOrderListState();
 }
 
-class _FavouriteListState extends State<_FavouriteList> {
+class _MyOrderListState extends State<_MyOrderList> {
   late FavouriteProvider _favouriteProvider;
 
   @override
@@ -158,7 +158,7 @@ class _FavouriteListState extends State<_FavouriteList> {
                               errorWidget: (context, url, error) => const Icon(Icons.heart_broken),
                             ),
                             Text(
-                              "NO ITEMS IN THE WISHLIST",
+                              "You haven't purchased anything",
                               style: StyleConstants.textStyle19,
                             ),
                             const SizedBox(
@@ -170,11 +170,11 @@ class _FavouriteListState extends State<_FavouriteList> {
                                   AnimatedBottomBar.bottomBarTabController.jumpToTab(0);
                                 },
                                 color: ColorConstants.kDarkGreen,
-                                padding: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(15),
                                 shape:
-                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                                 child: Text(
-                                  "START SHOPPING",
+                                  "START SHOPPING NOW",
                                   style: StyleConstants.textStyle17
                                       .copyWith(color: ColorConstants.kPrimaryColor),
                                 ))

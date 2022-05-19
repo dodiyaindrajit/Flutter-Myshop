@@ -393,7 +393,7 @@ class _ProductInfoState extends State<ProductInfo> {
         Consumer<CartProvider>(builder: (context, cart, child) {
           return AddButton(item: item);
         }),
-        const BuyNowButton()
+        BuyNowButton(item: item)
       ],
     );
   }

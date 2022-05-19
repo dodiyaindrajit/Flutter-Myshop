@@ -53,7 +53,7 @@ class MyShop extends StatelessWidget {
             primarySwatch: ColorConstants.kDarkGreenMaterial,
           ),
           primaryColor: ColorConstants.kPrimaryColor,
-          fontFamily: 'Gabriel',
+          fontFamily: 'Roboto',
         ),
         color: ColorConstants.kPrimaryColor,
         //Default router is splash screen and it will call AnimatedBottomBar

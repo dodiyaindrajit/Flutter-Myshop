@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/preference/preferences.dart';
 import 'package:myshop/screens/login-signup/login.dart';
+import 'package:myshop/screens/order/order_history.dart';
 import 'package:myshop/screens/setting/edit_profile.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class SettingScreen extends StatelessWidget {
   SettingScreen({Key? key}) : super(key: key);
@@ -56,14 +58,24 @@ class SettingScreen extends StatelessWidget {
         leading: listIcons[index],
         trailing: const Icon(Icons.arrow_forward_ios_rounded),
         onTap: () async {
-          await Preferences.setLogin(false);
+          //Tap On My Order
+          if (index == 0) {
+            pushNewScreen(
+              context,
+              screen: const MyOrder(),
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+            return;
+          }
+          //Tap On Logout
           if (index == 4 || index == 5) {
+            await Preferences.setLogin(false);
             Future.delayed(Duration.zero).then((_) {
               Navigator.of(context, rootNavigator: true).pushReplacement(
                 MaterialPageRoute(builder: (context) => LoginScreen()),
               );
             });
-
+            return;
           }
         },
       ),

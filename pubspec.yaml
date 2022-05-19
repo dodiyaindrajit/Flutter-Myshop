@@ -61,13 +61,9 @@ flutter:
     - assets/json/
 
   fonts:
-    - family: Gabriel
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/Gabriel-Sans-Bold.otf
-          weight: 700
-        - asset: assets/fonts/Gabriel-Sans-Normal.otf
-        - asset: assets/fonts/Gabriel-Sans-Medium-Italic.otf
-          style: italic
+        - asset: assets/fonts/Roboto-Regular.ttf
 
 
   

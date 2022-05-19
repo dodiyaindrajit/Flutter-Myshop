@@ -56,8 +56,7 @@ class _RazorPayButtonState extends State<RazorPayButton> {
           height: 30),
       trailing: MaterialButton(
         color: const Color.fromRGBO(16, 37, 81, 1),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0), side: const BorderSide(color: Colors.grey)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
         child: const Text(
           "RazorPay",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),

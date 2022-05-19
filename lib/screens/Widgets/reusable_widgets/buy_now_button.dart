@@ -1,18 +1,28 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
+import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/preference/preferences.dart';
+import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/providers/favourite_provider.dart';
 import 'package:myshop/screens/login-signup/login.dart';
 import 'package:myshop/screens/order/order_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BuyNowButton extends StatelessWidget {
-  const BuyNowButton({
+  BuyNowButton({
     Key? key,
+    required this.item,
   }) : super(key: key);
 
+  final Item item;
   static bool _isLogin = false;
+  late CartProvider _cartProvider;
+  late FavouriteProvider _favouriteProvider;
 
   Future<bool> checkUserIsLogin() async {
     return await Preferences.isLogin();
@@ -26,6 +36,12 @@ class BuyNowButton extends StatelessWidget {
         _isLogin = await checkUserIsLogin();
         _isLogin
             ? Future.delayed(Duration.zero).then((_) {
+                _cartProvider = Provider.of<CartProvider>(context, listen: false);
+                _favouriteProvider = Provider.of<FavouriteProvider>(context, listen: false);
+                _cartProvider.addToCart(item);
+                _favouriteProvider.deleteItemFromFavouriteByItem(item);
+
+                //After adding to cart item it will navigate to order page.
                 pushNewScreen(
                   context,
                   screen: const OrderScreen(),

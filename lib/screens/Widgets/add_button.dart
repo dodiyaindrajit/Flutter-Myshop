@@ -70,52 +70,5 @@ class AddButtonState extends State<AddButton> {
         style: StyleConstants.textStyle17.copyWith(color: ColorConstants.kPrimaryColor),
       ),
     );
-
-    /* return Row(
-      children: [
-        _itemCount != 0
-            ? new IconButton(
-                icon: new Icon(Icons.remove),
-                onPressed: () {
-                  setState(() {
-                    _cartProvider.decrementItemFromCartProvider(
-                        _cartItem!.itemCartIndex);
-                    _itemCount--;
-                  });
-                },
-              )
-            : new Container(),
-        new Text(_itemCount.toString()),
-        new IconButton(
-            icon: new Icon(Icons.add),
-            onPressed: () {
-              setState(() {
-                _cartProvider
-                    .incrementItemToCartProvider(_cartItem!.itemCartIndex);
-                _itemCount++;
-              });
-            })
-      ],
-    ); */
-
-    // return
-    //   MaterialButton(
-    //   onPressed: _isInCart != 0
-    //       ? null
-    //       : () {
-    //           // If the item is not in cart, we let the user add it.
-    //           // We are using context.read() here because the callback
-    //           // is executed whenever the user taps the button. In other
-    //           // words, it is executed outside the build method.
-    //           /*    var cart = context.read<CartModel>();
-    //           cart.add(item); */
-    //           _cartProvider.addToCart(widget.item);
-    //           setState(() {});
-    //         },
-    //   color: ColorConstants.kDarkGreen,
-    //
-    //
-    //   child: _isInCart != 0 ? const Text('Item Already In Cart') : const Text('Add Item to Cart'),
-    // );
   }
 }
