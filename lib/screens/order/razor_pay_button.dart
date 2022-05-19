@@ -16,7 +16,7 @@ class RazorPayButton extends StatefulWidget {
 }
 
 class _RazorPayButtonState extends State<RazorPayButton> {
-  var _razorpay = Razorpay();
+  final _razorpay = Razorpay();
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _RazorPayButtonState extends State<RazorPayButton> {
           width: 50.w,
           height: 30),
       trailing: MaterialButton(
-        color: const Color(0xFF3A81F1),
+        color: const Color.fromRGBO(16, 37, 81, 1),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50.0), side: const BorderSide(color: Colors.grey)),
         child: const Text(

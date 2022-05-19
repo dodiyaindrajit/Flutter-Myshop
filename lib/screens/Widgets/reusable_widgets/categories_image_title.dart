@@ -22,6 +22,13 @@ class CategoriesImageAndTitle extends StatelessWidget {
           pushNewScreenWithRouteSettings(context,
               screen: const CartScreen(), settings: const RouteSettings());
         },
+        color: ColorConstants.kDarkGreen.withOpacity(0.15),
+        elevation: 0,
+        textColor: ColorConstants.kBlack,
+        highlightElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,13 +39,6 @@ class CategoriesImageAndTitle extends StatelessWidget {
             ),
             Text(title, maxLines: 1)
           ],
-        ),
-        color: ColorConstants.kDarkGreen.withOpacity(0.15),
-        elevation: 0,
-        textColor: ColorConstants.kBlack,
-        highlightElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
         ),
       ),
     );

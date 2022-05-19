@@ -57,10 +57,11 @@ class LoginScreen extends StatelessWidget {
       scrollable: true,
       disableCustomPageTransformer: false,
       userType: LoginUserType.phone,
-
       onSubmitAnimationCompleted: () async {
         await Preferences.setLogin(true);
-        Navigator.pushReplacementNamed(context, "/animatedBar");
+        Future.delayed(Duration.zero).then((_) {
+          Navigator.pushReplacementNamed(context, "/animatedBar");
+        });
       },
       onRecoverPassword: _recoverPassword,
       loginProviders: <LoginProvider>[

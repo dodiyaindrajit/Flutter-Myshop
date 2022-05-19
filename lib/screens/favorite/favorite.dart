@@ -88,15 +88,14 @@ class _FavouriteListState extends State<_FavouriteList> {
                                               style: StyleConstants.textStyle19,
                                             ),
                                             Text(
-                                              data.favouriteList[index].details +
-                                                  "The Indian rupee is the official currency of India. The rupee is subdivided into 100 paise, though as of 2019, coins of denomination of 1 rupee is the lowest value in use. The issuance of the currency is controlled by the Reserve Bank of India.",
+                                              "${data.favouriteList[index].details}The Indian rupee is the official currency of India. The rupee is subdivided into 100 paise, though as of 2019, coins of denomination of 1 rupee is the lowest value in use. The issuance of the currency is controlled by the Reserve Bank of India.",
                                               style: StyleConstants.textStyle17
                                                   .copyWith(fontWeight: FontWeight.normal),
                                               maxLines: 3,
                                               overflow: TextOverflow.fade,
                                             ),
                                             Text(
-                                              "₹" + data.favouriteList[index].price.toString(),
+                                              "₹${data.favouriteList[index].price}",
                                               style: StyleConstants.textStyle17,
                                             ),
                                           ],

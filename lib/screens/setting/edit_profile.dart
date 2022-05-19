@@ -110,15 +110,6 @@ class _EditProfileState extends State<EditProfile> {
                       bottom: 1,
                       right: 1,
                       child: Container(
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.camera,
-                            color: ColorConstants.kBlack,
-                            size: 20,
-                          ),
-                          padding: const EdgeInsets.all(2),
-                          onPressed: () => pickImage(),
-                        ),
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(
@@ -141,6 +132,15 @@ class _EditProfileState extends State<EditProfile> {
                                 blurRadius: 3,
                               ),
                             ]),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.camera,
+                            color: ColorConstants.kBlack,
+                            size: 20,
+                          ),
+                          padding: const EdgeInsets.all(2),
+                          onPressed: () => pickImage(),
+                        ),
                       ),
                     ),
                   ],

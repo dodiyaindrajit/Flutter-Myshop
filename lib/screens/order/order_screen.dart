@@ -11,7 +11,10 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 40, title: const Text("Delivery Details"),),
+      appBar: AppBar(
+        toolbarHeight: 40,
+        title: const Text("Delivery Details"),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -52,10 +55,6 @@ class OrderScreen extends StatelessWidget {
                       ),
                       WidgetConst.heightSpacer(10),
                       MaterialButton(
-                        child: Text(
-                          "Deliver to this address",
-                          style: StyleConstants.textStyle17,
-                        ),
                         color: Colors.amber,
                         minWidth: double.infinity,
                         height: 40,
@@ -67,28 +66,32 @@ class OrderScreen extends StatelessWidget {
                             pageTransitionAnimation: PageTransitionAnimation.cupertino,
                           );
                         },
+                        child: Text(
+                          "Deliver to this address",
+                          style: StyleConstants.textStyle17,
+                        ),
                       ),
                       MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            side: const BorderSide(color: Colors.grey)),
+                        minWidth: double.infinity,
+                        onPressed: () {},
                         child: Text(
                           "Edit address",
                           style: StyleConstants.textStyle17,
                         ),
+                      ),
+                      MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             side: const BorderSide(color: Colors.grey)),
                         minWidth: double.infinity,
                         onPressed: () {},
-                      ),
-                      MaterialButton(
                         child: Text(
                           "Add delivery instructions",
                           style: StyleConstants.textStyle17,
                         ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            side: const BorderSide(color: Colors.grey)),
-                        minWidth: double.infinity,
-                        onPressed: () {},
                       )
                     ],
                   ),
@@ -126,38 +129,36 @@ class OrderScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             MaterialButton(
+                              color: Colors.amber,
+                              minWidth: double.infinity,
+                              height: 40,
+                              onPressed: () {},
                               child: Text(
                                 "Deliver to this address",
                                 style: StyleConstants.textStyle17,
                               ),
-                              color: Colors.amber,
-                              minWidth: double.infinity,
-                              height: 40,
-                              onPressed: () {
-
-                              },
                             ),
                             MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  side: const BorderSide(color: Colors.grey)),
+                              minWidth: double.infinity,
+                              onPressed: () {},
                               child: Text(
                                 "Edit address",
                                 style: StyleConstants.textStyle17,
                               ),
+                            ),
+                            MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                   side: const BorderSide(color: Colors.grey)),
                               minWidth: double.infinity,
                               onPressed: () {},
-                            ),
-                            MaterialButton(
                               child: Text(
                                 "Add delivery instructions",
                                 style: StyleConstants.textStyle17,
                               ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  side: const BorderSide(color: Colors.grey)),
-                              minWidth: double.infinity,
-                              onPressed: () {},
                             ),
                           ],
                         ),

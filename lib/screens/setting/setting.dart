@@ -58,9 +58,12 @@ class SettingScreen extends StatelessWidget {
         onTap: () async {
           await Preferences.setLogin(false);
           if (index == 4 || index == 5) {
-            Navigator.of(context, rootNavigator: true).pushReplacement(
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
+            Future.delayed(Duration.zero).then((_) {
+              Navigator.of(context, rootNavigator: true).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+            });
+
           }
         },
       ),

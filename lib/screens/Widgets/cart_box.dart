@@ -5,6 +5,7 @@ import 'package:myshop/constants/colors.dart';
 import 'package:myshop/constants/style.dart';
 import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/screens/Widgets/place_order_button.dart';
 import 'package:provider/provider.dart';
 
 class CartBoxList extends StatelessWidget {
@@ -63,19 +64,8 @@ class CartBoxList extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SafeArea(
-                              child: MaterialButton(
-                                color: ColorConstants.kDarkGreen,
-                                padding: const EdgeInsets.all(10),
-                                shape:
-                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  "Place Order",
-                                  style: StyleConstants.textStyle17
-                                      .copyWith(color: ColorConstants.kPrimaryColor),
-                                ),
-                                onPressed: () {},
-                              ),
+                            const SafeArea(
+                              child: PlaceOrderButton(),
                             ),
                           ],
                         )
@@ -134,8 +124,7 @@ class _CartListState extends State<_CartList> {
                       Text("Price: ${item.price.toString()}", style: StyleConstants.textStyle17),
                       const SizedBox(height: 3),
                       Text(
-                          item.details +
-                              "Either the assertion indicates an error in the framework itself, or we should provide substantially more information in this error message to help you determine and fix the underlying cause.",
+                          "${item.details}Either the assertion indicates an error in the framework itself, or we should provide substantially more information in this error message to help you determine and fix the underlying cause.",
                           style: const TextStyle(fontSize: 16.0),
                           maxLines: 3),
                     ],

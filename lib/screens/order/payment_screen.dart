@@ -5,7 +5,9 @@ import 'package:myshop/constants/style.dart';
 import 'package:myshop/constants/widgets.dart';
 import 'package:myshop/models/cart/catelog.dart';
 import 'package:myshop/providers/cart_provider.dart';
+import 'package:myshop/screens/order/google_pay_button.dart';
 import 'package:myshop/screens/order/razor_pay_button.dart';
+import 'package:myshop/screens/order/stripe_pay_button.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -70,41 +72,21 @@ class PaymentScreen extends StatelessWidget {
                 borderOnForeground: false,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Payment Mode",
-                        style: StyleConstants.textStyle19,
-                      ),
-                      WidgetConst.heightSpacer(5),
-                      ListTile(
-                        contentPadding: const EdgeInsets.all(0),
-                        leading: CachedNetworkImage(
-                            alignment: Alignment.topLeft,
-                            imageUrl:
-                                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Pay_Logo_%282020%29.svg/512px-Google_Pay_Logo_%282020%29.svg.png?20210501103928",
-                            width: 50.w,
-                            height: 30),
-                        trailing: MaterialButton(
-                          color: const Color(0xFF3A81F1),
-                          onPressed: () {},
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                              side: const BorderSide(color: Colors.grey)),
-                          child: const Text(
-                            "GPay",
-                            style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
+                  child: Consumer<CartProvider>(
+                    builder: (context, cart, child) => Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Payment Mode",
+                          style: StyleConstants.textStyle19,
                         ),
-                      ),
-                      Consumer<CartProvider>(
-                        builder: (context, cart, child) =>
-                            RazorPayButton(totalAmount: cart.getTotalAmount()),
-                      )
-                    ],
+                        WidgetConst.heightSpacer(5),
+                        GooglePayButton(totalAmount: cart.getTotalAmount()),
+                        RazorPayButton(totalAmount: cart.getTotalAmount()),
+                        StripePayButton(totalAmount: cart.getTotalAmount()),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -11,10 +11,10 @@ class FavouriteButton extends StatefulWidget {
   const FavouriteButton({required this.item, Key? key}) : super(key: key);
 
   @override
-  _FavouriteButtonState createState() => _FavouriteButtonState();
+  FavouriteButtonState createState() => FavouriteButtonState();
 }
 
-class _FavouriteButtonState extends State<FavouriteButton> {
+class FavouriteButtonState extends State<FavouriteButton> {
   late FavouriteProvider _favouriteProvider;
   late bool _isInFavourite = false;
 
@@ -41,11 +41,6 @@ class _FavouriteButtonState extends State<FavouriteButton> {
       elevation: 7,
       minWidth: 10,
       padding: const EdgeInsets.all(5),
-      child: Icon(
-        _checkItemIsInFavourite() ? Icons.favorite : Icons.favorite_border_rounded,
-        size: 25.0,
-        color: ColorConstants.kDarkGreen,
-      ),
       shape: const CircleBorder(),
       onPressed: _isInFavourite
           ? () {
@@ -65,6 +60,11 @@ class _FavouriteButtonState extends State<FavouriteButton> {
               _favouriteProvider.addToFavourite(widget.item);
               setState(() {});
             },
+      child: Icon(
+        _checkItemIsInFavourite() ? Icons.favorite : Icons.favorite_border_rounded,
+        size: 25.0,
+        color: ColorConstants.kDarkGreen,
+      ),
     );
   }
 }

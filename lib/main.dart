@@ -8,12 +8,15 @@ import 'package:myshop/providers/favourite_provider.dart';
 import 'package:myshop/screens/animated_bottom_bar.dart';
 import 'package:myshop/screens/login-signup/login.dart';
 import 'package:myshop/screens/splash.dart';
+import 'package:myshop/services/notificationservice.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   //App is Only Available in portraitUp Mode. setPreferredOrientations will set for IOS & Android.
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  //It will initialized notificationService instance
+  NotificationService().initNotification();
   runApp(const MyShop());
 }
 
@@ -65,5 +68,3 @@ class MyShop extends StatelessWidget {
     );
   }
 }
-
-//UI Branch

@@ -181,6 +181,8 @@ class _ProductInfoState extends State<ProductInfo> {
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 6),
                         margin: const EdgeInsets.only(left: 5, top: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25), color: ColorConstants.kRed),
                         child: const Text(
                           "23%\noff",
                           textAlign: TextAlign.center,
@@ -189,8 +191,6 @@ class _ProductInfoState extends State<ProductInfo> {
                               fontSize: 12,
                               fontWeight: FontWeight.bold),
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25), color: ColorConstants.kRed),
                       )
                     ],
                   ),
@@ -208,12 +208,12 @@ class _ProductInfoState extends State<ProductInfo> {
                         elevation: 7,
                         minWidth: 10,
                         padding: const EdgeInsets.all(5),
+                        shape: const CircleBorder(),
                         child: const Icon(
                           Icons.share,
                           size: 25.0,
                           color: ColorConstants.kDarkGreen,
                         ),
-                        shape: const CircleBorder(),
                       ),
                       Consumer<FavouriteProvider>(builder: (context, cart, child) {
                         return FavouriteButton(item: item);

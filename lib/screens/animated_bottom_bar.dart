@@ -10,6 +10,7 @@ import 'package:myshop/screens/favorite/favorite.dart';
 import 'package:myshop/screens/home/home.dart';
 import 'package:myshop/screens/search/search.dart';
 import 'package:myshop/screens/setting/setting.dart';
+import 'package:myshop/services/notificationservice.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -72,6 +73,7 @@ class AnimatedBottomBar extends StatelessWidget {
         childDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
         ),
+        drawer: drawerUI(),
         child: Scaffold(
           backgroundColor: ColorConstants.kGray,
           appBar: const PreferredSize(
@@ -80,11 +82,9 @@ class AnimatedBottomBar extends StatelessWidget {
           ),
           body: persistentBottomBar(context),
         ),
-        drawer: drawerUI(),
       );
     });
   }
-
 
   //BottomBar: Here we are using persistent Tab View is package class
   AnnotatedRegion<SystemUiOverlayStyle> persistentBottomBar(BuildContext context) {
@@ -151,7 +151,10 @@ class AnimatedBottomBar extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                NotificationService()
+                    .showNotificationWithSound(12, "New Stock Arrived", "Shop now in my ", 5);
+              },
               leading: const Icon(Icons.home),
               title: const Text('Home'),
             ),

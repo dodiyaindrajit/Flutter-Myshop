@@ -25,15 +25,19 @@ class BuyNowButton extends StatelessWidget {
       onPressed: () async {
         _isLogin = await checkUserIsLogin();
         _isLogin
-            ? pushNewScreen(
-                context,
-                screen: const OrderScreen(),
-                withNavBar: false,
-                pageTransitionAnimation: PageTransitionAnimation.cupertino,
-              )
-            : Navigator.of(context, rootNavigator: true).pushReplacement(
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-              );
+            ? Future.delayed(Duration.zero).then((_) {
+                pushNewScreen(
+                  context,
+                  screen: const OrderScreen(),
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
+              })
+            : Future.delayed(Duration.zero).then((_) {
+                Navigator.of(context, rootNavigator: true).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              });
       },
       color: ColorConstants.kDarkGreen,
       padding: const EdgeInsets.all(10),

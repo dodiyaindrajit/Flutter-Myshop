@@ -8,13 +8,13 @@ class CartProvider extends ChangeNotifier {
   var flutterCart = FlutterCart();
   late CartResponseWrapper cartResponseWrapper;
 
-  addToCart(Item _productElement, {int funcQuantity = 0}) async {
+  addToCart(Item productElement, {int funcQuantity = 0}) async {
     cartResponseWrapper = flutterCart.addToCart(
-        productId: _productElement.id,
-        unitPrice: _productElement.price,
-        productName: _productElement.name,
+        productId: productElement.id,
+        unitPrice: productElement.price,
+        productName: productElement.name,
         quantity: funcQuantity == 0 ? 1 : funcQuantity,
-        productDetailsObject: _productElement);
+        productDetailsObject: productElement);
     notifyListeners();
   }
 

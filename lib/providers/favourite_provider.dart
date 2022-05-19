@@ -6,8 +6,8 @@ class FavouriteProvider extends ChangeNotifier {
   List<Item> favouriteList = [];
   late CartResponseWrapper favouriteResponseWrapper;
 
-  addToFavourite(Item _productElement, {int funcQuantity = 0}) async {
-    favouriteList.add(_productElement);
+  addToFavourite(Item productElement, {int funcQuantity = 0}) async {
+    favouriteList.add(productElement);
     notifyListeners();
   }
 

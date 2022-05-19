@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Column category() {
-    List _categoryList = [
+    List categoryList = [
       ["Fashion", "https://cdn-icons-png.flaticon.com/128/3050/3050239.png"],
       ["Electric", "https://cdn-icons-png.flaticon.com/128/1055/1055687.png"],
       ["Mobile", "https://img.icons8.com/color/344/two-smartphones.png"],
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   return CategoriesImageAndTitle(
-                      title: _categoryList[index][0], imageUrl: _categoryList[index][1]);
+                      title: categoryList[index][0], imageUrl: categoryList[index][1]);
                 }),
           ),
         ),
@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Container countDownDeals(BuildContext context) {
-    List<Item> _productInfo = CatalogModel().dummyProductList;
+    List<Item> productInfo = CatalogModel().dummyProductList;
     List counter = [0, 1, 2, 3];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -119,10 +119,10 @@ class HomeScreen extends StatelessWidget {
                 for (int count in counter)
                   ProductImageAndInfo(
                     onTap: () => pushNewScreenWithRouteSettings(context,
-                        screen: ProductInfo(item: _productInfo[count], index: count),
+                        screen: ProductInfo(item: productInfo[count], index: count),
                         settings: const RouteSettings()),
-                    item: _productInfo[count],
-                    price: _productInfo[count].price,
+                    item: productInfo[count],
+                    price: productInfo[count].price,
                   ),
               ],
             ),
@@ -133,8 +133,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Container specialize(BuildContext context) {
-    List<Item> _productInfo = CatalogModel().dummyProductList;
-    _productInfo.shuffle();
+    List<Item> productInfo = CatalogModel().dummyProductList;
+    productInfo.shuffle();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -168,13 +168,13 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) => ProductImageAndInfo(
                 onTap: () => pushNewScreenWithRouteSettings(context,
                     screen: ProductInfo(
-                      item: _productInfo[index],
+                      item: productInfo[index],
                       index: index,
                     ),
                     settings: const RouteSettings()),
-                item: _productInfo[index],
-                title: _productInfo[index].name,
-                price: _productInfo[index].price,
+                item: productInfo[index],
+                title: productInfo[index].name,
+                price: productInfo[index].price,
               ),
             ),
           ),

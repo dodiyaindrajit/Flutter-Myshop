@@ -14,10 +14,10 @@ class AddButton extends StatefulWidget {
   const AddButton({required this.item, Key? key}) : super(key: key);
 
   @override
-  _AddButtonState createState() => _AddButtonState();
+  AddButtonState createState() => AddButtonState();
 }
 
-class _AddButtonState extends State<AddButton> {
+class AddButtonState extends State<AddButton> {
   late CartProvider _cartProvider;
   late FavouriteProvider _favouriteProvider;
   late CartItem? _cartItem;
